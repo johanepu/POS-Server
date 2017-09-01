@@ -12,4 +12,8 @@ class mdata extends CI_Model{
   function editsimpan($id,$fields){
 		$this ->db->where('id_client',$id)->update('table_clients',$fields);
   }
+
+  function editsimpanbarang($id,$fields){
+		$this ->db->where('id_barang',$id)->update('table_barang',$fields);
+  }
 }

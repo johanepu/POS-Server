@@ -71,7 +71,8 @@
                       <tr>
                         <td><?php echo $no++?></td>
                         <td><?php echo $c->id_barang?></td>
-                        <td ondblclick="contentEditable=true;"><?php echo $c->nama_barang?></td>
+                        <td title="Double click to Edit and press Enter to Save"
+							  class="edit" id="<?php echo $c->id_barang?>"><?php echo $c->nama_barang?></td>
                         <td><?php echo $c->harga_barang?></td>
                         <td><?php echo $c->id_cabang?></td>
                         <td><?php echo $c->stock?></td>
@@ -92,59 +93,7 @@
 </div>
 </div>
 
-<!-- Bootstrap modal -->
-  <div class="modal fade" id="modal_form" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">Tambah Barang</h3>
-      </div>
-      <div class="modal-body form">
-        <form action="#" id="form" class="form-horizontal">
-          <input type="hidden" value="" name="book_id"/>
-          <div class="form-body">
-            <div class="form-group">
-              <label class="control-label col-md-3">ID Barang</label>
-              <div class="col-md-9">
-                <input name="id_barang" placeholder="Masukkan ID Barang" class="form-control" type="number">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3">Nama Barang</label>
-              <div class="col-md-9">
-                <input name="nama_barang" placeholder="Masukkan Nama Barang" class="form-control" type="text">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3">Harga Barang</label>
-              <div class="col-md-9">
-                <input name="harga_barang" placeholder="Masukkan Harga Barang" class="form-control" type="number">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3">ID Cabang</label>
-              <div class="col-md-9">
-                <input name="id_cabang" placeholder="Masukkan ID Cabang" class="form-control" type="number">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-3">Stock</label>
-              <div class="col-md-9">
-				            <input name="stock" placeholder="Masukkan Jumlah" class="form-control" type="number">
-              </div>
-            </div>
-          </div>
-        </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="btnSave" onclick="save()" class="btn btn-default">Save</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-  <!-- End Bootstrap modal -->
+
 
 <!-- Datatables -->
 <script src="<?php echo base_url('vendors/datatables.net/js/jquery.dataTables.min.js');?>"></script>
@@ -196,14 +145,8 @@
 	}).appendTo( $this.empty() ).focus();
 	});
 
-	function tambah()
-    {
-      save_method = 'add';
-      $('#form')[0].reset(); // reset form on modals
-      $('#modal_form').modal('show'); // show bootstrap modal
-    //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
-    }
+
 	</script>
 </body>
-</html>
 <?php include 'footer.php' ?>
+</html>

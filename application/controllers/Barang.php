@@ -24,10 +24,10 @@ class Barang extends CI_Controller {
         $title = $this->input->post('title',true);
 
         $fields = array(
-                    'nama' => $title
+                    'nama_barang' => $title
                   );
 
-        $this->mdata->editsimpan($id,$fields);
+        $this->mdata->editsimpanbarang($id,$fields);
 
         echo "Successfully saved";
 
