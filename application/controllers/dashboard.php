@@ -20,6 +20,7 @@ class Dashboard extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('v_dashboard');
+		$data['judul'] = 'POS Server | Beranda';
+		$this->load->view('v_dashboard',$data);
 	}
 }
