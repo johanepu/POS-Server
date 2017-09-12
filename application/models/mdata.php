@@ -5,15 +5,25 @@ class mdata extends CI_Model{
 		return $this->db->get('table_clients');
 	}
 
-	function tampil_barang(){
-		return $this->db->get('table_barang');
+	function tampil_barang_masuk(){
+		return $this->db->get('barang_masuk');
 	}
 
-  function editsimpan($id,$fields){
-		$this ->db->where('id_client',$id)->update('table_clients',$fields);
+	function tampil_barang_keluar(){
+		return $this->db->get('barang_keluar');
+	}
+
+	function simpan($table,$data){
+		$this->db->insert($table, $data);
+	}
+
+
+  function editsimpan($id,$fields,$table){
+		$this ->db->where('id_barang',$id)->update($table,$fields);
   }
 
-  function editsimpanbarang($id,$fields){
-		$this ->db->where('id_barang',$id)->update('table_barang',$fields);
-  }
+	function hapus($id_barang,$table)
+	{
+	$this->db->where('id_barang',$id_barang)->delete($table);
+	}
 }

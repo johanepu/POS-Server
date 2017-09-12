@@ -50,7 +50,7 @@
                 KeyTable provides Excel like cell navigation on any table. Events (focus, blur, action etc) can be assigned to individual cells, columns, rows or all cells.
               </p>
 
-              <table id="datatable-keytable" class="table table-striped table-bordered">
+              <table id="barang_keluar" class="table table-striped table-bordered">
                 <thead>
                   <tr>
                     <th>Nomor</th>
@@ -58,7 +58,8 @@
                     <th>Nama Barang</th>
                     <th>Harga Satuan</th>
                     <th>ID Cabang</th>
-                    <th>Stock</th>
+                    <th>Jumlah</th>
+                    <th>Tanggal Keluar</th>
                   </tr>
                 </thead>
 
@@ -66,7 +67,7 @@
                 <tbody>
           <?php
           $no = 1;
-          foreach($barang as $c){
+          foreach($barang_keluar as $c){
           ?>
                       <tr>
                         <td><?php echo $no++?></td>
@@ -75,7 +76,8 @@
 							  class="edit" id="<?php echo $c->id_barang?>"><?php echo $c->nama_barang?></td>
                         <td><?php echo $c->harga_barang?></td>
                         <td><?php echo $c->id_cabang?></td>
-                        <td><?php echo $c->stock?></td>
+                        <td><?php echo $c->jumlah?></td>
+                        <td><?php echo $c->tanggal_keluar?></td>
                       </tr>
           <?php }?>
                 </tbody>

@@ -142,5 +142,5 @@ $('.edit').on('dblclick', function() {
   </script>
 
 </body>
-</html>
 <?php include 'footer.php' ?>
+</html>

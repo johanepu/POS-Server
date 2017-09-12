@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Barang extends CI_Controller {
+class Barang_keluar extends CI_Controller {
 		function __construct(){
 			parent::__construct();
 			$this->load->model('mdata');
@@ -9,9 +9,9 @@ class Barang extends CI_Controller {
 
 	public function index()
 	{
-		$data['judul'] = 'POS Server | Data Barang';
-		$data['barang'] = $this->mdata->tampil_barang()->result();
-		$this->load->view('v_barang',$data);
+		$data['judul'] = 'POS Server | Data Barang Keluar';
+		$data['barang_keluar'] = $this->mdata->tampil_barang_keluar()->result();
+		$this->load->view('v_barang_keluar',$data);
 	}
 
 	function savedata()

@@ -42,7 +42,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Asu Kabeh</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Cukupkeun</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -74,10 +74,18 @@
                       <li><a href="<?php echo site_url('clients');?>">Data Client</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Barang <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> Stok Barang </a>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> Barang Masuk <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">Tambah Barang</a></li>
-                      <li><a href="<?php echo site_url('barang');?>">Data Barang</a></li>
+                      <li><a href="<?php echo site_url('barang_masuk');?>">Tambah Barang</a></li>
+                      <li><a href="<?php echo site_url('masuk_detail');?>">Barang Masuk Detail</a></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-desktop"></i> Barang Keluar <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo site_url('barang_keluar');?>">Kirim Barang</a></li>
+                      <li><a href="<?php echo site_url('keluar_detail');?>">Barang Keluar Detail</a></li>
                     </ul>
                   </li>
                 </ul>
