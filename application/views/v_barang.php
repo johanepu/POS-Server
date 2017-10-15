@@ -1,4 +1,3 @@
-
 <?php include 'header.php'  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,35 +71,55 @@
          <div class="col-md-12 col-sm-12 col-xs-12">
            <div class="x_panel">
              <div class="x_title">
-               <h2>Silahkan Pilih Cabang :</h2>
-                 					<div class="col-md-8 col-sm-8 col-xs-6">
-                 					<select id="" class="form-control input-sm pil" onchange="javascript:lihatbarang(this.value)">
-                 						<option value="0" selected>--Pilih--</option>
-                 						<?php foreach($cabang as $c){?>
-                 						<option value="<?php echo $c->id?>"><?php echo $c->nama?></option>
-                 						<?php }?>
-                 					</select></div>
-                 					<a class="btn btn-default btn-sm disabled tom" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a>
-                             <div class="clearfix"></div>
-                           </div>
-                           <div class="x_content">
-                             <table id="myTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                               <thead>
-                                 <tr>
-                                   <th>No. </th>
-                                   <th>ID Barang</th>
-                                   <th>Nama Barang</th>
-                                   <th>Harga</th>
-                                   <th>Stok</th>
-                                   <th>Satuan</th>
-                                   <th>Pengaturan</th>
-                                   <th>Hapus</th>
-                                 </tr>
-                               </thead>
-                               <tbody>
-                               </tbody>
-                             </table>
-                         </div>
+             <h2>Stok Barang Gudang</h2>
+              <a class="btn btn-default btn-sm pull-right" onclick="tambah()" id="tombol"><span class="fa fa-plus"></span> Tambah Stok Barang</a>
+               <div class="clearfix"></div>
+               </div>
+             <div class="x_content">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="card-box table-responsive">
+                  <p class="text-muted font-13 m-b-30">
+                    Edit bisa dilakukan dengan melakukan double-click pada kolom yang hendak di ubah.
+                  </p>
+
+                  <table id="barang" class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Nomor</th>
+                        <th>ID Barang</th>
+                        <th>Nama Barang</th>
+                        <th>Harga Satuan</th>
+                        <th>Jumlah</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+
+
+                    <tbody>
+              <?php
+              $no = 1;
+              foreach($barang as $c){
+              ?>
+                  <tr id="<?php echo $c->id?>">
+                  <td><?php echo $no++?></td>
+                  <td title="Kolom ini tidak bisa diedit"
+                  class="id" id="id_barang" name="barang"><?php echo $c->id_barang?></td>
+                  <td title="Double click untuk edit and tekan Enter untuk menyimpan"
+                  class="edit" id="nama_barang"><?php echo $c->nama_barang?></td>
+                  <td title="Double click untuk edit and tekan Enter untuk menyimpan"
+                  class="edit" id="harga_barang">Rp. <?php echo $c->harga_barang?></td>
+                  <td title="Kolom ini tidak bisa diedit"
+                  class="" id="stok"><?php echo $c->stok?></td>
+                  <td name="barang"><button class="btn btn-danger btn-xs delete" id="<?php echo $c->id;?>">
+                  <i class="fa fa-remove"></i></button></td>
+                  </tr>
+              <?php }?>
+
+
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -213,78 +232,10 @@
 
 var flag =1;
  var pesan;
- // //init datatable
- //  $('#barang_masuk').dataTable({
- //    responsive:false
- //  });
-
-
-  //show details barang masuk
-    $(document).ready(function(){
-      var table = $('#barang_masuk').DataTable({
-        responsive:false
-      });
-      $('#barang_masuk tbody').on('click', 'td button.details', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row(tr);
-        var id = $(this).closest('tr').prop('id');
-        $.get({
-          url:'<?php echo site_url('barang_masuk/detailbarangmasuk/') ?>'+id,
-          success: function(data){
-            $('.'+id).html(data);
-          }
-        });
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( format(id) ).show();
-            tr.addClass('shown');
-        }
-      });
-    });
-
-    //details details barang keluar
-    function format2 (id) {
-      return '<table class="table dt-responsive table-bordered nowrap tabel" width="100%"><thead>'
-      +'<tr><th colspan="5" style="text-align:center;background:#ededed">Detail transaksi '+id+'</th>'
-      +'</tr><tr><th>Nama barang</th><th>Harga</th><th>Jumlah</th><th>Total Harga</th></tr></thead>'
-      +'<tbody class="'+id+'"></tbody></table>';
-    }
-
-
-   //show details barang keluar
-     $(document).ready(function(){
-       var table = $('#barang_keluar').DataTable({
-         responsive:false,
-         autoWidth:false
-       });
-       $('#barang_keluar tbody').on('click', 'td button.details', function () {
-         var tr = $(this).closest('tr');
-         var row = table.row(tr);
-         var id = $(this).closest('tr').prop('id');
-         $.get({
-           url:'<?php echo site_url('barang_keluar/detailbarangkeluar/') ?>'+id,
-           success: function(data){
-             $('.'+id).html(data);
-           }
-         });
-         if ( row.child.isShown() ) {
-             // This row is already open - close it
-             row.child.hide();
-             tr.removeClass('shown');
-         }
-         else {
-             // Open this row
-             row.child(format2(id)).show();
-             tr.addClass('shown');
-         }
-       });
-     });
-
+ //init datatable
+  $('#barang').dataTable({
+    responsive:true
+  });
 
   //show modal
   function tambah()
@@ -443,7 +394,6 @@ var flag =1;
         $(document).ready(function(){
           $(document).on('click', '#daftarbarang ul li', function(){
           var name = $(this).attr('name');
-          var harga_barang = $(this).attr('harga_barang');
           var id = $(this).attr('id');
           var idroot = $(this).closest('div.input').prop('id');
           if(name == 'baru'){
@@ -457,8 +407,6 @@ var flag =1;
             $('#'+idroot+' input.inputid').removeAttr('name');
             $('#'+idroot+' input.isiid').attr('name','pil[]');
             $('#'+idroot+' input.isiid').val(id);
-            // $('#'+idroot+' input.hargalama').attr('harga','pil[]');
-            // $('#'+idroot+' input.hargalama').val(harga_barang);
             $('#'+idroot+' div.hilang').attr('class','form-group hilang hidden');
             $('#'+idroot+' div.daftarbarang').fadeOut();
           }

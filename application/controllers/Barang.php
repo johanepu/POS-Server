@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Barang_Masuk extends CI_Controller {
+class Barang extends CI_Controller {
 		function __construct(){
 			parent::__construct();
 			$this->load->model('mdata');
@@ -19,9 +19,9 @@ class Barang_Masuk extends CI_Controller {
 
 	public function index()
 	{
-		$data['judul'] = 'POS Server | Data Barang Masuk';
-		$data['barang_masuk'] = $this->mdata->tampil_all('barang_masuk')->result();
-		$this->load->view('v_barang_masuk',$data);
+		$data['judul'] = 'POS Server | Data Barang Persediaan';
+		$data['barang'] = $this->mdata->tampil_all('barang')->result();
+		$this->load->view('v_barang',$data);
 	}
 
 	function updatestok()
@@ -239,17 +239,17 @@ class Barang_Masuk extends CI_Controller {
 
 	function detailbarangmasuk($id)
   {
-    $hasil = $this->mdata->tampil_barang_transaksi('barang_masuk_detail',$id)->result();
+    $hasil = $this->mdata->tampil_barang_transaksi('barang_masuk_details',$id)->result();
     $output ='';
     $total = 0;
     foreach ($hasil as $h) {
-      $output .= '<tr><td>'.$h->nama_barang.'</td>';
-      $output .= '<td> Rp.'.$h->harga_barang.'</td>';
+      $output .= '<tr><td>'.$h->nama.'</td>';
+      $output .= '<td> Rp.'.$h->harga.'</td>';
       $output .= '<td>'.$h->jumlah.'</td>';
-      $output .= '<td> Rp.'.$h->harga_barang*$h->jumlah.'</td></tr>';
-      $total = $total + $h->harga_barang*$h->jumlah;
+      $output .= '<td> Rp.'.$h->harga*$h->jumlah.'</td></tr>';
+      $total = $total + $h->harga*$h->jumlah;
     }
-    $output .= '<tr><td colspan="3" style="text-align:center"> Total Harga</td><td>Rp.'.$total .'</td></tr>';
+    $output .= '<tr><td colspan="4" style="text-align:center"> Total Harga</td><td>Rp.'.$total .'</td></tr>';
     echo $output;
   }
 

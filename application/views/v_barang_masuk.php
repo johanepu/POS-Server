@@ -1,31 +1,82 @@
+
 <?php include 'header.php'  ?>
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+   <style media="screen">
+   .modal-open {
+     padding-right: 0px !important;
+     overflow-y: auto !important;
+   }
+   table.tabel{
+     width: 70%;
+     margin-left: auto;
+     margin-right: auto;
+   }
+   #myTable2 td.desk {
+     white-space: normal !important;
+   }
+   </style>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <!-- Meta, title, CSS, favicons, etc. -->
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>Gentelella Alela! | </title>
+
+       <!-- Bootstrap -->
+   <link href="<?php echo base_url('vendors/bootstrap/dist/css/bootstrap.min.css'); ?>" rel="stylesheet">
+   <!-- Font Awesome -->
+   <link href="<?php echo base_url('vendors/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
+   <!-- NProgress -->
+   <link href="<?php echo base_url('vendors/nprogress/nprogress.css'); ?>" rel="stylesheet">
+   <!-- iCheck -->
+   <link href="<?php echo base_url('vendors/iCheck/skins/flat/green.css'); ?>" rel="stylesheet">
+
+   <!-- bootstrap-progressbar -->
+   <link href="<?php echo base_url('vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css'); ?>" rel="stylesheet">
+   <!-- JQVMap -->
+   <link href="<?php echo base_url('vendors/jqvmap/dist/jqvmap.min.css'); ?>" rel="stylesheet"/>
+   <!-- bootstrap-daterangepicker -->
+   <link href="<?php echo base_url('vendors/bootstrap-daterangepicker/daterangepicker.css'); ?>" rel="stylesheet">
+ <!-- Datatables -->
+   <link href="<?php echo base_url('vendors/datatables.net-bs/css/dataTables.bootstrap.min.css'); ?>" rel="stylesheet">
+   <link href="<?php echo base_url('vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css'); ?>" rel="stylesheet">
+   <link href="<?php echo base_url('vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css'); ?>" rel="stylesheet">
+   <link href="<?php echo base_url('vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css'); ?>" rel="stylesheet">
+   <link href="<?php echo base_url('vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css'); ?>" rel="stylesheet">
+
+   <!-- Custom Theme Style -->
+   <link href="<?php echo base_url('build/css/custom.min.css'); ?>" rel="stylesheet">
+ </head>
+
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">
-  <!-- page content -->
-  <!-- page content -->
 
+  <!-- page content -->
 
   <div class="right_col" role="main">
+           <div class="">
+             <div class="page-title">
+               <div class="title_left">
+                 <h3>Database <small>Barang Stok</small></h3>
+               </div>
 
+             </div>
+ 			<div class="clearfix"></div>
 
-      <div class="clearfix"></div>
-
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title">
-            <div class = "col-md-2 col-sm-12"> <h2>Barang Masuk </h2> </div>
-
-
-            <ul class="nav navbar-right panel_toolbox">
-              <li> <a class="btn btn-default btn-sm" onclick="tambah()" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
+ 			<div class="row">
+         <div class="col-md-12 col-sm-12 col-xs-12">
+           <div class="x_panel">
+             <div class="x_title">
+             <h2>Data Barang Masuk</h2>
+              <a class="btn btn-default btn-sm pull-right" onclick="tambah()" id="tombol"><span class="fa fa-plus"></span> Tambah Stok Barang</a>
+               <div class="clearfix"></div>
+               </div>
+             <div class="x_content">
             <div class="row">
               <div class="col-sm-12">
                 <div class="card-box table-responsive">
@@ -33,16 +84,14 @@
                     Edit bisa dilakukan dengan melakukan double-click pada kolom yang hendak di ubah.
                   </p>
 
-                  <table id="datatable-keytable" class="table table-striped table-bordered">
+                  <table id="barang_masuk" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                         <th>Nomor</th>
-                        <th>ID Barang</th>
-                        <th>Nama Barang</th>
-                        <th>Harga Satuan</th>
-                        <th>Jumlah</th>
-                        <th>Tanggal Masuk</th>
-                        <th>Aksi</th>
+                        <th>ID Transaksi</th>
+                        <th>Deskripsi</th>
+                        <th>Waktu Transaksi</th>
+                        <th>Info Detail</th>
                       </tr>
                     </thead>
 
@@ -50,23 +99,19 @@
                     <tbody>
               <?php
               $no = 1;
-              foreach($barang_masuk as $c){
+              foreach($barang_masuk as $b){
               ?>
-                          <tr id='<?php echo $c->id_barang;?>'>
-                            <td><?php echo $no++?></td>
-                            <td title="Double click to Edit and press Enter to Save"
-                    class="edit" id="id_barang"><?php echo $c->id_barang?></td>
-                            <td title="Double click to Edit and press Enter to Save"
-                    class="edit" id="nama_barang"><?php echo $c->nama_barang?></td>
-                            <td title="Double click to Edit and press Enter to Save"
-                    class="edit" id="harga_barang"><?php echo $c->harga_barang?></td>
-                            <td title="Double click to Edit and press Enter to Save"
-                    class="edit" id="jumlah"><?php echo $c->jumlah?></td>
-                            <td title="Double click to Edit and press Enter to Save"
-                    class="edit" id="tanggal_masuk"><?php echo $c->tanggal_masuk?></td>
-                            <td><button class="btn btn-danger btn-xs" onclick="hapus(<?php echo $c->id_barang;?>)">
-                  <i class="fa fa-remove"></i></button></td>
-                          </tr>
+                  <tr id="<?php echo $b->id_transaksi; ?>">
+                  <td><?php echo $no++?></td>
+                  <td title="Kolom ini tidak bisa diedit"
+                  class=""><?php echo $b->id_transaksi?></td>
+                  <td title="Kolom ini tidak bisa diedit"
+                  class="" id=""><?php echo $b->deskripsi?></td>
+                  <td title="Kolom ini tidak bisa diedit"
+                  class="" id=""><?php echo $b->tanggal?></td>
+                  <td><button class="btn btn-default btn-sm details" id="">
+                  <i class="fa fa-info-circle"></i>  &nbsp;details</button></td>
+                  </tr>
               <?php }?>
 
 
@@ -78,56 +123,85 @@
           </div>
         </div>
       </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+
 
 
 
 <!-- Bootstrap modal -->
-<div class="modal fade" id="modal_form" role="dialog">
+<div class="modal fade" id="tambah_barang" role="dialog">
 <div class="modal-dialog">
 <div class="modal-content">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <h3 class="modal-title">Yoman</h3>
+    <h3 class="modal-title"></h3>
   </div>
   <div class="modal-body form">
     <form action="#" id="form" class="form-horizontal">
       <input type="hidden" value="" name="barang_masuk"/>
-      <div class="form-body">
-        <div class="form-group">
+      <div class="form-body" id="form-body">
+        <!-- <div class="form-group">
+             <label class="control-label col-md-3">Id Transaksi</label>
+             <div class="col-md-9">
+               <input name="id_transaksi" id="transaction_id" placeholder="Id transaksi harus unik" class="form-control" type="text" title="Hanya angka" pattern="^[0-9]{3,7}$" minlength="3" maxlength="7" autocomplete="off" required>
+             </div>
+           </div> -->
+       <!-- <div class="form-group">
+         <label class="control-label col-md-3">Tanggal Masuk</label>
+         <div class="col-md-9">
+   <input name="tanggal[]" id="5" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local">
+         </div>
+       </div> -->
+
+       <div class="form-group">
+         <label class="control-label col-md-3">Deskripsi</label>
+         <div class="col-md-9">
+           <input name="desk" id="desk" placeholder="Deskripsi transaksi" class="form-control" type="text" maxlength="50" autocomplete="off">
+         </div>
+       </div>
+
+      <div class="input" id="1000">
+        <div class="form-group  hidden hilang">
           <label class="control-label col-md-3">Id Barang</label>
           <div class="col-md-9">
-            <input name="id_barang" id="1" placeholder="Masukkan id barang" class="form-control" type="text">
+            <input  placeholder="Masukkan id barang" class="form-control inputid" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3">Nama Barang</label>
           <div class="col-md-9">
-            <input name="nama_barang" id="2" placeholder="Masukkan nama barang" class="form-control" type="text">
+            <input name="nama[]" id="2" placeholder="Masukkan nama barang" class="form-control barang"  autocomplete="on" type="text">
+            <input type="hidden" name="pil[]" value="" class="isiid">
+            <div class="daftarbarang" id="daftarbarang"></div>
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3">Harga</label>
           <div class="col-md-9">
-    <input name="harga_barang" id="3" placeholder="Masukkan harga barang" class="form-control" type="text">
+    <input name="harga[]" id="3" placeholder="Masukkan harga barang" class="form-control" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3">Jumlah</label>
-          <div class="col-md-9">
-    <input name="jumlah" id="4" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="text">
+          <div class="col-md-5">
+    <input name="jml[]" id="4" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="text">
           </div>
+          <div class="col-md-1">
+                <!-- <a class="btn btn-default btn-sm" onclick="tambah()" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a> -->
+                <a class="btn btn-primary btn-sm plus" id="2000" onclick=""><i class="fa fa-plus"></i>Tambah Entri</a>
         </div>
-        <div class="form-group">
-          <label class="control-label col-md-3">Tanggal Masuk</label>
-          <div class="col-md-9">
-    <input name="tanggal_masuk" id="5" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local">
-          </div>
         </div>
+
       </div>
+    </div>
     </form>
       </div>
       <div class="modal-footer">
-        <a type="button" id="btnSave" class="btn btn-default">Tambah</a>
+        <a type="button" id="btnSave" class="btn btn-default">Simpan</a>
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
       </div>
     </div><!-- /.modal-content -->
@@ -153,27 +227,71 @@
 <script src="<?php echo base_url('vendors/pdfmake/build/vfs_fonts.js');?>"></script>
 
 <script>
-  $('#barang_masuk').dataTables({
-    responsive:true
-  });
+
+var flag =1;
+ var pesan;
+ // //init datatable
+ //  $('#barang_masuk').dataTable({
+ //    responsive:false
+ //  });
+
+  //details details barang masuk
+  function format (id) {
+    return '<table class="table dt-responsive table-bordered nowrap tabel" width="100%"><thead>'
+    +'<tr><th colspan="5" style="text-align:center;background:#ededed">Detail transaksi '+id+'</th>'
+    +'</tr><tr><th>Nama barang</th><th>Harga</th><th>Jumlah</th><th>Total Harga</th></tr></thead>'
+    +'<tbody class="'+id+'"></tbody></table>';
+  }
+
+  //show details barang masuk
+    $(document).ready(function(){
+      var table = $('#barang_masuk').DataTable({
+        responsive:false
+      });
+      $('#barang_masuk tbody').on('click', 'td button.details', function () {
+        var tr = $(this).closest('tr');
+        var row = table.row(tr);
+        var id = $(this).closest('tr').prop('id');
+        $.get({
+          url:'<?php echo site_url('barang_masuk/detailbarangmasuk/') ?>'+id,
+          success: function(data){
+            $('.'+id).html(data);
+          }
+        });
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( format(id) ).show();
+            tr.addClass('shown');
+        }
+      });
+    });
+
+  //show modal
   function tambah()
     {
 		document.getElementById('btnSave').setAttribute('onclick','simpan()');
 		$('#form')[0].reset();
-        $('#modal_form').modal('show');
+    $('#tambah_barang').modal('show');
+    $('.modal-title').text('Tambah Barang Gudang');
 
     }
 
+    //simpan barang
     function simpan()
     {
 	 $.ajax({
-		url : '<?php echo site_url('Barang_Masuk/simpanbarang');?>',
+		url : '<?php echo site_url('Barang/updatestok');?>',
 		type: "POST",
 		data: $('#form').serialize(),
 		dataType: "JSON",
 		success: function(response)
 		{
-		   $('#modal_form').modal('hide');
+		   $('#tambah_barang').modal('hide');
 		   alert('Berhasil menambahkan data');
 		   location.reload();
 		},
@@ -181,76 +299,193 @@
 		{
 			alert('Gagal menambahkan data');
 		}
-	});
+	   });
     }
 
+
+
+    //tambah elemen input stok
+  $(document).on('click', 'a.plus' ,function(){
+      var id = $(this).attr('id');
+      var ids = parseInt(id);
+      var idbaru = ids+1;
+      var idminus = idbaru*2; var idminus2 = idminus-2;
+      var id2 = parseInt($(this).closest('div.input').prop('id'));
+      var idsbaru = id2+1;
+        $("#form-body").append('<div class="input" id="'+idsbaru+'"><div class="form-group hidden hilang"><label class="control-label col-md-3">Id Barang</label>'
+      +'<div class="col-md-9"><input placeholder="Id barang harus unik" class="form-control inputid" type="text"></div></div>'
+      +'<div class="form-group"><label class="control-label col-md-3">Nama Barang</label><div class="col-md-9">'
+      +'<input type="text" name="nama[]" value="" placeholder="Masukkan nama barang" class="form-control barang" autocomplete="on">'
+      +'<input type="hidden" name="pil[]" value="" class="isiid"><div class="daftarbarang" id="daftarbarang"></div></div></div>'
+      +'<div class="form-group"><label class="control-label col-md-3" style="padding-left:3px">Harga</label><div class="col-md-9"><input name="harga[]" id="harga" placeholder="Masukkan harga barang" class="form-control" type="text"></div></div>'
+      +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-9"><input name="jml[]" id="jml" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="text"></div></div>'
+      // +'<div class="form-group"><label class="control-label col-md-3">Tanggal Masuk</label><div class="col-md-5"><input name="tanggal[]" id="tgl" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local"></div>'
+      +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="'+idbaru+'"><i class="fa fa-plus"></i></a></div>'
+      +'<div class="col-md-1"><a class="btn btn-danger btn-sm minus" id="'+idminus+'"><i class="fa fa-minus"></i></a></div></div></div>');
+       $('#'+id).attr('class','btn btn-primary btn-sm plus hidden');
+       $('#'+idminus2).attr('class','btn btn-primary btn-sm minus hidden');
+  });
+
+  //hapus elemen input tambah stok barang
+  $(document).on('click','a.minus', function(){
+    var id = $(this).attr('id');
+    var ids = parseInt(id); ids2 = ids-2;
+    var idbaru = ids/2; idbaru = idbaru-1;
+    var id2 = $(this).closest('div.input').prop('id');
+    $('#'+id2).remove();
+    $('#'+idbaru).attr('class','btn btn-primary btn-sm plus');
+    $('#'+ids2).attr('class','btn btn-danger btn-sm minus');
+  });
+
+
+  //show modal tambah stok
+      function tambahstok()
+      {
+        //document.getElementById('btnSave2').setAttribute('class','btn btn-default disabled');
+        $('#form')[0].reset();
+        $('div.daftarbarang').html('');
+        $('div.hilang').attr('class','form-group hidden hilang');
+        $('#tambah_barag').modal('show');
+        $('.modal-title').text('Tambah Stok Bahan');
+      }
+
+    //edit dobel klik
 	$('.edit').on('dblclick', function() {
-  var ok = 0;
-  var id = $(this).closest('tr').prop('id');
+    var ok = 0;
+    	var id = $(this).closest('tr').find('td.id').text();
+      var where = $(this).closest('tr').find('td.id').prop('id');
+      var tabel = $(this).closest('tr').find('td.id').attr('name');
   var kolom = $(this).attr('id');
   var teks = $(this).html();
   var $this = $(this);
-	var $input = $('<input>', {
-		value: $this.text(),
-		type: 'text',
-    blur: function() {
-		   if (ok == 1)
-		   {
-			$this.text(this.value);
-			}
-			else{
-				$this.text(teks);
-				alert('Data belum tersimpan, tekan Enter untuk menyimpan');
-			}
-		},
-		keyup: function(e){
-			if((e.keyCode) === 13){
-				if (confirm('Are you sure you want to save this thing into the database?')){
-          ok = 1;
-          e.preventDefault();
-					var value = $input.val();
-					$.ajax({
-						type: "POST",
-						url:'<?php echo site_url('barang_masuk/editsimpan')?>',
-						data: {
-							'id':id,
-							'isi':value,
-              'kolom':kolom,
-              'tabel':'barang_masuk'
-						},
-						success: function(response){
-							alert(response);
-						},
-					});
-				}
-			}
-		}
-	}).appendTo( $this.empty() ).focus();
-	});
-
-  function hapus(id)
-      {
-        if(confirm('Apa anda yakin akan menghapus data ini?'))
-        {
-          // ajax delete data from database
-            $.ajax({
-              url : "<?php echo site_url('barang_masuk/hapus')?>/"+id,
-              type: "POST",
-              dataType: "JSON",
-              success: function(data)
-              {
-                 alert('Data berhasil dihapus');
-                 location.reload();
-              },
-              error: function (jqXHR, textStatus, errorThrown)
-              {
-                  alert('Gagal menghapus data');
-              }
-          });
-
+  var isian = $this.text();
+   isian = isian.replace('Rp. ','');
+   var $input = $('<input>', {
+     value: isian,
+     id: 'input'+kolom,
+     type: 'text',
+     blur: function() {
+       clearSelection();
+        if (ok == 1)
+        { if(kolom == 'harga_barang'){
+         $this.text('Rp. '+this.value);
+        }else{
+         $this.text(this.value);
         }
-      }
+       }
+       else{
+         $this.text(teks);
+         alert('Data belum tersimpan, tekan Enter untuk menyimpan');
+       }
+     },
+     keyup: function(e){
+       if((e.keyCode) === 13){
+         if (confirm('Apa anda yakin ingin menyimpannya?')){
+           if(flag==1){
+             ok = 1;
+             e.preventDefault();
+             var value = $input.val();
+             $.ajax({
+               type: "POST",
+               url:'<?php echo site_url('barang/editsimpan')?>',
+               data: {
+                 'id':id,
+                 'isi':value,
+                 'kolom':kolom,
+                 'tabel':tabel,
+                 'where':where
+               },
+               success: function(response){
+                 alert(response);
+               },
+             });
+           }
+           else{
+             alert(pesan);
+           }
+         }
+       }
+     }
+   }).appendTo( $this.empty() ).focus();
+   });
 
+  //search autocomplete
+      $(document).ready(function(){
+        $(document).on('keyup','.barang', function(){
+          var idroot = $(this).closest('div.input').prop('id');
+          var barang = $(this).val();
+          if(barang != ''){
+            $.post({
+              url:'<?php echo site_url('Barang/search/') ?>',
+              data : {'nama' : barang},
+              success:function(data) {
+                $('#'+idroot+' div.daftarbarang').fadeIn();
+                $('#'+idroot+' div.daftarbarang').html(data);
+              }
+            });
+          }
+        });
+        $(document).ready(function(){
+          $(document).on('click', '#daftarbarang ul li', function(){
+          var name = $(this).attr('name');
+          var harga_barang = $(this).attr('harga_barang');
+          var id = $(this).attr('id');
+          var idroot = $(this).closest('div.input').prop('id');
+          if(name == 'baru'){
+            $('#'+idroot+' input.barang').val(id);
+            $('#'+idroot+' div.hilang').attr('class','form-group hilang');
+            $('#'+idroot+' input.isiid').removeAttr('name');
+            $('#'+idroot+' input.inputid').attr('name','pil[]');
+            $('#'+idroot+' div.daftarbarang').fadeOut();
+          }else{
+            $('#'+idroot+' input.barang').val($(this).text());
+            $('#'+idroot+' input.inputid').removeAttr('name');
+            $('#'+idroot+' input.isiid').attr('name','pil[]');
+            $('#'+idroot+' input.isiid').val(id);
+            // $('#'+idroot+' input.hargalama').attr('harga','pil[]');
+            // $('#'+idroot+' input.hargalama').val(harga_barang);
+            $('#'+idroot+' div.hilang').attr('class','form-group hilang hidden');
+            $('#'+idroot+' div.daftarbarang').fadeOut();
+          }
+          });
+        });
+      });
+
+      //remove selection
+         function clearSelection() {
+           if(document.selection && document.selection.empty) {
+               document.selection.empty();
+           } else if(window.getSelection) {
+               var sel = window.getSelection();
+               sel.removeAllRanges();
+           }
+         }
+
+         //hapus barang dan produk
+         	 $(document).ready(function(){
+              $(document).on('click', '.delete', function(){
+                var tabel = $(this).closest('td').attr('name');
+                var id = $(this).attr('id');
+                if(confirm('Apa anda yakin akan menghapus data ini?'))
+                {
+                  $.ajax({
+                    url : "<?php echo site_url('barang/hapus')?>/"+id,
+                    type: "POST",
+                    data : {'tabel' : tabel},
+                    dataType: "JSON",
+                    success: function(data)
+                    {
+                       alert('Data berhasil dihapus');
+                       location.reload();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        alert('Gagal menghapus data. Barang masih digunakan di produk');
+                    }
+                  });
+                }
+              });
+            });
 	</script>
 </body>
 <?php include 'footer.php' ?>

@@ -1,3 +1,8 @@
+<?php
+  date_default_timezone_set("Asia/Jakarta");
+  setlocale(LC_ALL, 'IND');
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +11,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <style media="screen">
+      .modal-open{
+        padding-right: 0px!important;
+        overflow-y: auto!important;
+      }
+    </style>
     <title><?php echo $judul; ?> </title>
 
     <!-- Bootstrap -->
@@ -74,20 +84,12 @@
                       <li><a href="<?php echo site_url('clients');?>">Data Client</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Stok Barang </a>
+                  <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-dashboard"></i> Stok Barang </a>
                   </li>
-                  <li><a><i class="fa fa-desktop"></i> Barang Masuk <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('barang_masuk');?>">Tambah Barang</a></li>
-                      <li><a href="<?php echo site_url('masuk_detail');?>">Barang Masuk Detail</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-desktop"></i> Barang Keluar <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('barang_keluar');?>">Kirim Barang</a></li>
-                      <li><a href="<?php echo site_url('keluar_detail');?>">Barang Keluar Detail</a></li>
-                    </ul>
-                  </li>
+                <li><a href="<?php echo site_url('barang_masuk')?>"><i class="fa fa-desktop"></i> Barang Masuk </a>
+                </li>
+                <li><a href="<?php echo site_url('barang_keluar')?>"><i class="fa fa-desktop"></i> Barang Keluar </a>
+                </li>
                 </ul>
               </div>
 
