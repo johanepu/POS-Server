@@ -2,7 +2,7 @@
 
 class mdata extends CI_Model{
 	function tampil_clients(){
-		return $this->db->get('table_clients');
+		return $this->db->get('cabang');
 	}
 
 	function tampil_all($table){
@@ -64,4 +64,9 @@ class mdata extends CI_Model{
 	{
 		$this->db->where($where)->delete($table);
 	}
+
+	function namacabang($where){
+    return $this->db->query('SELECT nama_cabang FROM cabang WHERE id_cabang = '.$where.'');
+	}
+
 }

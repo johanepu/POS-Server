@@ -78,11 +78,7 @@
                 <ul class="nav side-menu">
                   <li><a href="<?php echo site_url('dashboard');?>"><i class="fa fa-home"></i> Beranda </span></a>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Clients <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">Tambah Client</a></li>
-                      <li><a href="<?php echo site_url('clients');?>">Data Client</a></li>
-                    </ul>
+                  <li><a href="<?php echo site_url('clients')?>"><i class="fa fa-dashboard"></i> Data Client </a>
                   </li>
                   <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-dashboard"></i> Stok Barang </a>
                   </li>
