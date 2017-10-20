@@ -268,4 +268,12 @@ class Barang extends CI_Controller {
 		}
 		echo json_encode(array("status" => TRUE));
 	}
+
+	function hargabarang($id)
+  {
+    $where = array('id_barang' => $id);
+    $data = $this->mdata->tampil_where('barang', $where)->result();
+    $output =  '<input name="harga[]" id="harga_barang" value="'.$data[0]->harga_barang.'" class="form-control harga" placeholder="Harga barang" type="text">';
+		echo json_encode($output);
+  }
 }

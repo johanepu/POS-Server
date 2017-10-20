@@ -14,9 +14,7 @@
      margin-left: auto;
      margin-right: auto;
    }
-   #myTable2 td.desk {
-     white-space: normal !important;
-   }
+
    </style>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <!-- Meta, title, CSS, favicons, etc. -->
@@ -73,18 +71,20 @@
            <div class="x_panel">
              <div class="x_title">
                <h2>Silahkan Pilih Cabang :</h2>
+                 <a class="btn btn-default btn-sm  disabled tom" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a>
                  					<div class="col-md-8 col-sm-8 col-xs-6">
-                 					<select id="" class="form-control input-sm pil" onchange="javascript:lihatbarang(this.value)">
+                 					<select id="cab" class="form-control input-sm pil" onchange="javascript:lihatbarang(this.value)">
                  						<option value="0" selected>--Pilih--</option>
                  						<?php foreach($cabang as $c){?>
-                 						<option value="<?php echo $c->id?>"><?php echo $c->nama_cabang?></option>
+                 						<option value="<?php echo $c->id_cabang?>"><?php echo $c->nama_cabang?></option>
                  						<?php }?>
-                 					</select></div>
-                 			<a class="btn btn-default btn-sm disabled tom" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a>
+                 					</select>
+                      </div>
+
                              <div class="clearfix"></div>
                            </div>
                            <div class="x_content">
-                             <table id="myTable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                             <table id="barang_client" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                <thead>
                                  <tr>
                                    <th>No. </th>
@@ -191,10 +191,10 @@
 
 var flag =1;
  var pesan;
- // //init datatable
- //  $('#barang_masuk').dataTable({
- //    responsive:false
- //  });
+ //init datatable
+  $('#barang_client').dataTable({
+    responsive:false
+  });
 
  //tampil barang
 	function lihatbarang(id){
@@ -207,10 +207,10 @@ var flag =1;
 		$.get({
 			url : '<?php echo site_url('Clients/tampilbarang/');?>'+id,
 			success : function(data){
-				$('#myTable').DataTable().destroy();
-				$('#myTable tbody').html(data);
+				$('#barang_client').DataTable().destroy();
+				$('#barang_client tbody').html(data);
 				$(document).ready(function() {
-					$('#myTable').DataTable({
+					$('#barang_client').DataTable({
             responsive:false
           });
 				});
@@ -223,7 +223,7 @@ var flag =1;
  //show modal tambah produk
 	 $(function(){
      $('.tom').click( function(){
-       var e = $(this).closest('div.tab-pane').find('select.pil');
+       var e = $(this).closest('div.x_title').find('select.pil');
        var value = e.children('option').filter(':selected').val();
        var teks = e.children('option').filter(':selected').text();
        document.getElementById('id_cabang').value = value;
@@ -247,7 +247,7 @@ var flag =1;
        location.reload();
      },
      error: function (jqXHR, textStatus, errorThrown){
-       alert('Gagal mengirim barang. Stok barang tidak mencukupi');
+       alert(textStatus + ' ' + errorThrown);
      }
    });
    e.preventDefault();
@@ -299,7 +299,7 @@ var flag =1;
         var idsbaru = id2+1;
         $("#form-body").append('<div class="input" id="'+idsbaru+'"><div class="form-group"><label class="control-label col-md-3">Nama Barang</label><div class="col-md-7">'
         +'<select name="pil[]" class="form-control pilbarang" onchange="" required><option value="" selected>--Pilih--</option><?php foreach($barang as $d){?>'
-        +'<option value="<?php echo $d->id_barang?>"><?php echo $d->nama_barang?></option><?php }?></select><input type="hidden" name="nama[]" value="" class="nama"><input type="hidden" name="kategori[]" value="" class="kategori"></div></div>'
+        +'<option value="<?php echo $d->id_barang?>"><?php echo $d->nama_barang?></option><?php }?></select><input type="hidden" name="nama[]" value="" class="nama"></div></div>'
         +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-3"><input name="jml[]" id="jml" placeholder="Jumlah produk" class="form-control" type="text" title="Hanya angka diperbolehkan" pattern="^[1-9][0-9]{0,11}$" maxlength="11" autocomplete="off" required></div>'
         +'<label class="control-label col-md-1" style="padding-left:3px">Harga</label><div class="col-md-3 colharga"><input name="harga_barang[]" id="harga_barang" placeholder="Harga barang" class="form-control" type="text" disabled></div>'
         +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="'+idbaru+'"><i class="fa fa-plus"></i></a></div>'
@@ -332,15 +332,17 @@ var flag =1;
       }
 
     //edit dobel klik
-	$('.edit').on('dblclick', function() {
+	$(document).on('dblclick', '.edit', function() {
     var ok = 0;
-    	var id = $(this).closest('tr').find('td.id').text();
-      var where = $(this).closest('tr').find('td.id').prop('id');
-      var tabel = $(this).closest('tr').find('td.id').attr('name');
+    	var id = $(this).closest('tr').find('td.id_barang').text();
+      var where = $(this).closest('tr').find('td.id_barang').prop('id');
+      var tabel = $(this).closest('tr').attr('name');
   var kolom = $(this).attr('id');
   var teks = $(this).html();
   var $this = $(this);
   var isian = $this.text();
+  var idcabang = $('#cab').children('option').filter(':selected').val();
+
    isian = isian.replace('Rp. ','');
    var $input = $('<input>', {
      value: isian,
@@ -369,13 +371,14 @@ var flag =1;
              var value = $input.val();
              $.ajax({
                type: "POST",
-               url:'<?php echo site_url('barang/editsimpan')?>',
+               url:'<?php echo site_url('clients/editsimpan')?>',
                data: {
                  'id':id,
                  'isi':value,
                  'kolom':kolom,
                  'tabel':tabel,
-                 'where':where
+                 'where':where,
+                 'id_cabang':idcabang
                },
                success: function(response){
                  alert(response);
@@ -482,7 +485,7 @@ var flag =1;
                     url : '<?php echo site_url('clients/hargabarang/') ?>'+id,
                     dataType:'json',
                     success: function(data){
-                      $('#'+idroot+' div.colharga').html(data.output1);
+                      $('#'+idroot+' div.colharga').html(data);
                     }
                   });
                 });

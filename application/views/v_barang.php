@@ -183,7 +183,7 @@
         </div>
         <div class="form-group">
           <label class="control-label col-md-3">Harga</label>
-          <div class="col-md-9">
+          <div class="col-md-9 colharga">
     <input name="harga[]" id="3" placeholder="Masukkan harga barang" class="form-control" type="text">
           </div>
         </div>
@@ -267,6 +267,24 @@ var flag =1;
 		}
 	   });
     }
+
+    // //harga otomatis
+    //     $(document).ready(function(){
+    //       $(document).on('click', '#daftarbarang ul li', function(){
+    //         var idroot = $(this).closest('div.input').prop('id');
+    //         var id = $(this).val();
+    //         var nama = $(this).val();
+    //         alert(nama);
+    //         $('#'+idroot+' input.nama').val(nama);
+    //         $.get({
+    //           url : '<?php echo site_url('barang/hargabarang/') ?>'+id,
+    //           dataType:'json',
+    //           success: function(data){
+    //             $('#'+idroot+' div.colharga').html(data);
+    //           }
+    //         });
+    //       });
+    //     });
 
 
 
@@ -409,6 +427,13 @@ var flag =1;
             $('#'+idroot+' input.isiid').val(id);
             $('#'+idroot+' div.hilang').attr('class','form-group hilang hidden');
             $('#'+idroot+' div.daftarbarang').fadeOut();
+            $.get({
+              url : '<?php echo site_url('barang/hargabarang/') ?>'+id,
+              dataType:'json',
+              success: function(data){
+                $('#'+idroot+' div.colharga').html(data);
+              }
+            });
           }
           });
         });
