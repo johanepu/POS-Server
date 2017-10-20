@@ -7,9 +7,15 @@ include 'header.php'
 <html lang="en">
   <head>
     <style media="screen">
-      h4.modal-title{
-        display: none !important;
-      }
+    .modal-open {
+      padding-right: 0px !important;
+      overflow-y: auto !important;
+    }
+    table.tabel{
+      width: 70%;
+      margin-left: auto;
+      margin-right: auto;
+    }
     </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -54,7 +60,7 @@ include 'header.php'
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Database <small>Cabang</small></h3>
+                <h3>Data <small>Cabang</small></h3>
               </div>
             </div>
 			<div class="clearfix"></div>
@@ -89,7 +95,8 @@ include 'header.php'
                                       <th>Username</th>
                                       <th>Password</th>
                                       <th>IP Address</th>
-                                      <th>Waktu dibuat</th>
+                                      <th>Telepon</th>
+                                      <th>Tanggal Dibuat </th>
                                       <th>Hapus</th>
                                     </tr>
                                   </thead>
@@ -98,19 +105,21 @@ include 'header.php'
                           						$no = 1;
                           						foreach($cabang as $c){
                           					  ?>
-                                      <tr id="<?php echo $c->id?>">
+                                      <tr id="<?php echo $c->id_cabang?>">
                                       <td><?php echo $no++?></td>
                                       <td title="Double click untuk edit and tekan Enter to menyimpan"
-                                      class="edit" id="nama"><?php echo $c->nama?></td>
+                                      class="edit" id="nama"><?php echo $c->nama_cabang?></td>
                                       <td title="Kolom ini tidak bisa diedit"
                                       class="" id="user"><?php echo $c->user?></td>
                                       <td title="Kolom ini tidak bisa diedit"
-                                      class="" id="pass"><?php echo $c->pass?></td>
+                                      class="" id="pass"><?php echo $c->access_password?></td>
                                       <td title="Kolom ini tidak bisa diedit"
-                                      class="" id="ip"><?php echo $c->ip?></td>
+                                      class="" id="ip"><?php echo $c->ip_address?></td>
+                                      <td title="Double click untuk edit and tekan Enter to menyimpan"
+                                      class="edit" id="nama"><?php echo $c->telepon?></td>
                                       <td title="Kolom ini tidak bisa diedit"
                                       class="" id="tanggal"><?php echo strftime("%A, %d/%m/%Y : %T", strtotime($c->dibuat));?></td>
-                                      <td name="cabang"><button class="btn btn-danger btn-xs delete" id="<?php echo $c->id;?>">
+                                      <td name="cabang"><button class="btn btn-danger btn-xs delete" id="<?php echo $c->id_cabang;?>">
                                       <i class="fa fa-remove"></i></button></td>
                                       </tr>
                                       <?php }?>
@@ -128,7 +137,7 @@ include 'header.php'
               					<select id="pil" class="form-control input-sm" onchange="javascript:lihatpetugas(this.value)">
               						<option value="0" selected>--Pilih--</option>
               						<?php foreach($cabang as $c){?>
-              						<option value="<?php echo $c->id?>"><?php echo $c->nama?></option>
+              						<option value="<?php echo $c->id_cabang?>"><?php echo $c->nama_cabang?></option>
               						<?php }?>
               					</select></div>
               					<a class="btn btn-default btn-sm disabled" onclick="tambahpetugas()" id="tombol"><span class="fa fa-plus"></span> Tambah Petugas</a>
@@ -179,7 +188,7 @@ include 'header.php'
           <div class="form-group">
         	  <label class="control-label col-md-3">Nama Cabang</label>
         	  <div class="col-md-9">
-        		<input name="nama" id="name" placeholder="Masukkan nama cabang" class="form-control" title="Minimal 5 karakter. Hanya huruf, angka dan karakter spesial(petik atas, titik, spasi, strip)" pattern="^[A-Za-z0-9.' -]{5,30}$" type="text" minlength="5" maxlength="30" autocomplete="off" required>
+        		<input name="nama_cabang" id="name" placeholder="Masukkan nama cabang" class="form-control" title="Minimal 5 karakter. Hanya huruf, angka dan karakter spesial(petik atas, titik, spasi, strip)" pattern="^[A-Za-z0-9.' -]{5,30}$" type="text" minlength="5" maxlength="30" autocomplete="off" required>
         	  </div>
         	</div>
         	<div class="form-group">
@@ -192,17 +201,18 @@ include 'header.php'
         	<div class="form-group">
         	  <label class="control-label col-md-3">Telepon</label>
         	  <div class="col-md-9">
-        		<input name="telfon" id="telfon" placeholder="Masukkan nomor telp." class="form-control" title="Minimal 10 karakter. Hanya angka." pattern="^[0-9]{10,13}$" type="text" minlength="10" maxlength="13" autocomplete="off" required>
+        		<input name="telepon" id="telfon" placeholder="Masukkan nomor telp." class="form-control" title="Minimal 10 karakter. Hanya angka." pattern="^[0-9]{10,13}$" type="text" minlength="10" maxlength="13" autocomplete="off" required>
 
         	  </div>
         	</div>
         	<div class="form-group">
-        	  <label class="control-label col-md-3">Nama Cabang</label>
+        	  <label class="control-label col-md-3">Alamat Cabang</label>
         	  <div class="col-md-9">
         		<textarea name="alamat" id="alamat" placeholder="Masukkan alamat" class="form-control" autocomplete="off" required></textarea>
         	  </div>
         	</div>
         </div>
+
         <div class="modal-body step step-2 form">
           <div class="form-group">
           <label class="control-label col-md-3">Username</label>
@@ -213,13 +223,13 @@ include 'header.php'
           <div class="form-group">
           <label class="control-label col-md-3">Password</label>
           <div class="col-md-9">
-          		  <input name="pass" id="passw" placeholder="Masukkan password" class="form-control" title="Password minimal 8 karakter, minimal 1 Uppercase, dan 1 angka" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" minlength="8" maxlength="30" autocomplete="off" required>
+          		  <input name="access_password" id="passw" placeholder="Masukkan password" class="form-control" title="Password minimal 8 karakter, minimal 1 Uppercase, dan 1 angka" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" minlength="8" maxlength="30" autocomplete="off" required>
           </div>
           </div>
           <div class="form-group">
           <label class="control-label col-md-3">Ip Address</label>
           <div class="col-md-9">
-          		  <input name="ip" id="ip" placeholder="Format ipv4" title="Format ipv4" class="form-control" type="text" autocomplete="off" pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" required>
+          		  <input name="ip_address" id="ip" placeholder="Format ipv4" title="Format ipv4" class="form-control" type="text" autocomplete="off" pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" required>
           </div>
           </div>
           <div class="form-group">
@@ -257,7 +267,7 @@ include 'header.php'
           <div class="form-group">
             <label class="control-label col-md-3">Nama Petugas</label>
             <div class="col-md-9">
-              <input name="nama" id="namapetugas" placeholder="Nama lengkap petugas" class="form-control" type="text" title="Minimal 3 karakter. Hanya huruf, angka dan karakter spesial (petik atas, titik, spasi, strip)" pattern="^[A-Za-z0-9.' -]{3,30}$" type="text" minlength="3" maxlength="30" autocomplete="off" required>
+              <input name="nama_petugas" id="namapetugas" placeholder="Nama lengkap petugas" class="form-control" type="text" title="Minimal 3 karakter. Hanya huruf, angka dan karakter spesial (petik atas, titik, spasi, strip)" pattern="^[A-Za-z0-9.' -]{3,30}$" type="text" minlength="3" maxlength="30" autocomplete="off" required>
             </div>
           </div>
           <div class="form-group">
@@ -275,13 +285,13 @@ include 'header.php'
           <div class="form-group">
             <label class="control-label col-md-3">Password</label>
             <div class="col-md-9">
-              <input name="pass" id="password" placeholder="Password harus blablabla" class="form-control" type="password" title="Password minimal 8 karakter, minimal 1 Uppercase, dan 1 angka" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" minlength="8" maxlength="30" autocomplete="off" required>
+              <input name="pass_petugas" id="password" placeholder="Password harus blablabla" class="form-control" type="password" title="Password minimal 8 karakter, minimal 1 Uppercase, dan 1 angka" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" minlength="8" maxlength="30" autocomplete="off" required>
             </div>
           </div>
         </div>
         </div>
         <div class="modal-footer">
-          <input type="hidden" id="idcabang" name="idcabang"/>
+          <input type="hidden" id="id_cabang" name="id_cabang"/>
           <input type="submit" id="btnSave2" value="Simpan" class="btn btn-default"/>
           <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
         </div>
@@ -387,7 +397,7 @@ include 'header.php'
       var e = document.getElementById('pil');
       var value = e.options[e.selectedIndex].value;
       var teks = e.options[e.selectedIndex].innerHTML;
-      document.getElementById('idcabang').value = value;
+      document.getElementById('id_cabang').value = value;
       $('#form_petugas')[0].reset();
       $('#modal_form_petugas').modal('show');
       $('.modal-title2').text('Tambah petugas di '+teks);

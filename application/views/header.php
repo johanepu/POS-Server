@@ -78,7 +78,9 @@
                 <ul class="nav side-menu">
                   <li><a href="<?php echo site_url('dashboard');?>"><i class="fa fa-home"></i> Beranda </span></a>
                   </li>
-                  <li><a href="<?php echo site_url('clients')?>"><i class="fa fa-dashboard"></i> Data Client </a>
+                  <li><a href="<?php echo site_url('cabang')?>"><i class="fa fa-dashboard"></i> Data Cabang </a>
+                  </li>
+                  <li><a href="<?php echo site_url('clients')?>"><i class="fa fa-dashboard"></i> Data Barang Client </a>
                   </li>
                   <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-dashboard"></i> Stok Barang </a>
                   </li>

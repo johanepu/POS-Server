@@ -1,6 +1,38 @@
 <?php
 
 class mdata extends CI_Model{
+
+	function apicabang()
+ {
+	 $hasil = $this->db->query('SELECT user, access_password FROM cabang')->result();
+	 foreach ($hasil as $h ) {
+		 $user[] = $h->user;
+	 }
+	 foreach ($hasil as $h ) {
+		 $pass[] = $h->pass;
+	 }
+	 return $result = array_combine($user,$pass);
+ }
+ function apiip()
+ {
+	 $hasil = $this->db->query('SELECT ip_address FROM cabang')->result();
+	 $ip = '';
+	 foreach ($hasil as $h ) {
+		 $ip = $ip.$h->ip.',';
+	 }
+	 return $ip;
+ }
+
+ function getId($user)
+  {
+    $hasil = $this->db->where('user',$user)->get('cabang')->result();
+    foreach ($hasil as $h) {
+      $result = $h->id_cabang;
+    }
+    return $result;
+  }
+
+
 	function tampil_clients(){
 		return $this->db->get('cabang');
 	}

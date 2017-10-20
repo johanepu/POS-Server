@@ -9,7 +9,7 @@ class Clients extends CI_Controller{
 		// }
 	}
 	function index(){
-		$data['judul'] = 'Waroenkpos | Database Barang Cabang';
+		$data['judul'] = 'POS Retail | Database Barang Cabang';
 		// $data['produk'] = $this->mdata->tampil_all('produk')->result();
 		$data['cabang'] = $this->mdata->tampil_all('cabang')->result();
 		$data['barang'] = $this->mdata->tampil_all('barang')->result();
