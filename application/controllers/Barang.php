@@ -5,19 +5,12 @@ class Barang extends CI_Controller {
 		function __construct(){
 			parent::__construct();
 			$this->load->model('mdata');
+			if($this->session->userdata('status') != "login"){
+				redirect(site_url("login"));
 		}
+	}
 
-		// function index2()
-		//   {
-		// 		$data['barang'] = $this->mdata->tampil_all('barang')->result();
-		//     $data['barangmasuk'] = $this->mdata->tampil_all('barangmasuk')->result();
-		//     $data['barangkeluar'] = $this->mdata->tampil_all('barangkeluar')->result();
-		//     $data['produk'] = $this->mdata->tampil_all('produk')->result();
-		//     $data['judul'] = 'Waroenkpos | Database Barang Gudang';
-		//     $this->load->view('vgudang',$data);
-		//   }
-
-	public function index()
+function index()
 	{
 		$data['judul'] = 'POS Server | Data Barang Persediaan';
 		$data['barang'] = $this->mdata->tampil_all('barang')->result();
@@ -204,7 +197,7 @@ class Barang extends CI_Controller {
     }
 
 
-	 public function editsimpan()
+ function editsimpan()
   {
         If( $_SERVER['REQUEST_METHOD']  != 'POST'  ){
             echo 'method salah';

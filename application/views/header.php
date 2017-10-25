@@ -12,9 +12,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style media="screen">
-      .modal-open{
-        padding-right: 0px!important;
-        overflow-y: auto!important;
+      .nav_menu{
+        margin : 0 !important;
+      }
+      i{
+        border:0 !important;
+        margin:0 !important;
+        padding:0 !important;
+      }
+      a.site_title{
+        padding-left:25px;
+      }
+      .modal-open {
+        padding-right: 0px !important;
+        overflow-y: auto !important;
+      }
+      input.invalid, textarea.invalid{
+        border: 2px solid red;
+      }
+      input.valid, textarea.valid{
+        border: 2px solid green;
       }
     </style>
     <title><?php echo $judul; ?> </title>
@@ -52,7 +69,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Cukupkeun</span></a>
+              <a href="<?php echo site_url('dashboard')?>" class="site_title"><i class="fa fa-paw"></i> <span>POS Retail</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -60,11 +77,11 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="<?php echo base_url('vendors/jquery-knob/secretplan.jpg');?>" alt="..." class="img-circle profile_img">
+                <img src="<?php echo base_url('build/images/user.png'); ?>" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Selamat Datang,</span>
+                <h2><?php echo $this->session->userdata('nama_petugas');?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -125,84 +142,26 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="<?php echo base_url('build/images/user.png'); ?>" alt=""><?php echo $this->session->userdata('nama');?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="<?php echo site_url('profil')?>"> Profil</a></li>
                     <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
+                      <a href="<?php echo site_url('setting');?>">
+                        <span>Pengaturan</span>
                       </a>
                     </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo site_url('login/logout')?>"><i class="fa fa-sign-out pull-right"></i> Keluar</a></li>
                   </ul>
                 </li>
 
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
+                    <span id="notif" class=""></span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
                   </ul>
                 </li>
               </ul>
@@ -256,6 +215,33 @@
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url('build/js/custom.min.js');?>"></script>
-
-  </body>
-</html>
+    <script>
+    function toggleFullscreen(event) {
+      var element = document.body;
+      if (event instanceof HTMLElement) {
+        element = event;
+      }
+      var isFullscreen = document.webkitIsFullScreen || document.mozFullScreen || false;
+      element.requestFullScreen = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || function () { return false; };
+      document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || function () { return false; };
+      isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
+    }
+    $(function(){
+      $.ajax({
+        url:'<?php echo site_url('dashboard/notifikasi') ?>',
+        type:'get',
+        dataType:'json',
+        success:function(data){
+          $('#menu1').html(data.isi);
+          $('#notif').html(data.notif);
+          $('#notif').attr('class',data.bubble);
+        }
+      });
+      $('#notifikasi').click(function(){
+        $('#notif').html('');
+        $('#notif').attr('class','');
+      });
+    });
+    </script>
+    </body>
+    </html>

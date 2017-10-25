@@ -4,9 +4,9 @@ class Clients extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('mdata');
-		// if($this->session->userdata('status') != "login"){
-		// 	redirect(site_url("login"));
-		// }
+		if($this->session->userdata('status') != "login"){
+			redirect(site_url("login"));
+		}
 	}
 	function index(){
 		$data['judul'] = 'POS Retail | Database Barang Cabang';

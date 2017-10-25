@@ -1,7 +1,5 @@
 
-<?php
-include 'header.php'
-?>
+<?php include 'header.php'?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +64,6 @@ include 'header.php'
 			<div class="clearfix"></div>
 
 			<div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_content">
@@ -312,8 +309,7 @@ include 'header.php'
     <script src="<?php echo base_url('vendors/jszip/dist/jszip.min.js'); ?>"></script>
     <script src="<?php echo base_url('vendors/pdfmake/build/pdfmake.min.js'); ?>"></script>
     <script src="<?php echo base_url('vendors/pdfmake/build/vfs_fonts.js'); ?>"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="<?php echo base_url('build/js/custom.min.js'); ?>"></script>
+
 	<script>
   sendEvent = function() {
       $('#modal_form').trigger('next.m.2');
@@ -503,6 +499,6 @@ include 'header.php'
 	</script>
 </body>
 <?php
-include 'footer.html'
+include 'footer.php'
 ?>
 </html>

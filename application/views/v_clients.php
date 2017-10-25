@@ -62,7 +62,6 @@
                <div class="title_left">
                  <h3>Database <small>Barang Cabang</small></h3>
                </div>
-
              </div>
  			<div class="clearfix"></div>
 
@@ -253,41 +252,6 @@ var flag =1;
    e.preventDefault();
  })
 
-
-
-
-  //   //tambah elemen input stok
-  // $(document).on('click', 'a.plus' ,function(){
-  //     var id = $(this).attr('id');
-  //     var ids = parseInt(id);
-  //     var idbaru = ids+1;
-  //     var idminus = idbaru*2; var idminus2 = idminus-2;
-  //     var id2 = parseInt($(this).closest('div.input').prop('id'));
-  //     var idsbaru = id2+1;
-  //       $("#form-body").append('<div class="input" id="'+idsbaru+'"><div class="form-group hidden hilang"><label class="control-label col-md-3">Id Barang</label>'
-  //     +'<div class="col-md-9"><input placeholder="Id barang harus unik" class="form-control inputid" type="text"></div></div>'
-  //     +'<div class="form-group"><label class="control-label col-md-3">Nama Barang</label><div class="col-md-9">'
-  //     +'<input type="text" name="nama[]" value="" placeholder="Masukkan nama barang" class="form-control barang" autocomplete="on">'
-  //     +'<input type="hidden" name="pil[]" value="" class="isiid"><div class="daftarbarang" id="daftarbarang"></div></div></div>'
-  //     +'<div class="form-group"><label class="control-label col-md-3" style="padding-left:3px">Harga</label><div class="col-md-9"><input name="harga[]" id="harga" placeholder="Masukkan harga barang" class="form-control" type="text"></div></div>'
-  //     +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-9"><input name="jml[]" id="jml" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="text"></div></div>'
-  //     // +'<div class="form-group"><label class="control-label col-md-3">Tanggal Masuk</label><div class="col-md-5"><input name="tanggal[]" id="tgl" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local"></div>'
-  //     +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="'+idbaru+'"><i class="fa fa-plus"></i></a></div>'
-  //     +'<div class="col-md-1"><a class="btn btn-danger btn-sm minus" id="'+idminus+'"><i class="fa fa-minus"></i></a></div></div></div>');
-  //      $('#'+id).attr('class','btn btn-primary btn-sm plus hidden');
-  //      $('#'+idminus2).attr('class','btn btn-primary btn-sm minus hidden');
-  // });
-  //
-  // //hapus elemen input tambah stok barang
-  // $(document).on('click','a.minus', function(){
-  //   var id = $(this).attr('id');
-  //   var ids = parseInt(id); ids2 = ids-2;
-  //   var idbaru = ids/2; idbaru = idbaru-1;
-  //   var id2 = $(this).closest('div.input').prop('id');
-  //   $('#'+id2).remove();
-  //   $('#'+idbaru).attr('class','btn btn-primary btn-sm plus');
-  //   $('#'+ids2).attr('class','btn btn-danger btn-sm minus');
-  // });
 
   //add input elemen tambah produk
     $(document).on('click', 'a.plus' ,function(){
