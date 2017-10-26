@@ -1,6 +1,10 @@
 <?php
 include 'header.php'
 ?>
+<?php
+  date_default_timezone_set("Asia/Jakarta");
+  setlocale(LC_ALL, 'IND');
+ ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -88,25 +92,41 @@ include 'header.php'
 							<div class="col-md-6">
 							  <div class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px;">
 								<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-								<span><?php echo strftime("%A, %d %B %Y. Pukul %T WIB", strtotime('now')); ?></span>
+								<span><?php
+                        $dt = new DateTime();
+                        echo $dt->format('Y-m-d H:i:s');
+                        ?></span>
 							  </div>
 							</div>
 						  </div>
 						  </br>
-						  <div class="item form-group">
-							<label class="control-label col-md-1" for="email"><h4>Email : </h4>
-							</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-							  <input disabled value="<?php echo $admins[0]->email;?>" class="form-control col-md-6 col-xs-12">
-							</div>
-						  </div>
+              <div class="clearfix"></div>
+              <div class="item form-group">
+               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username"><h4>Username : </h4><span></span>
+                 </label>
+                 <div class="col-md-6 col-sm-6 col-xs-12">
+                   <input disabled value="<?php echo $admins[0]->user;?>" class="isi form-control col-md-6 col-xs-12">
+                 </div>
+                 </div>
+               </br>
+               <div class="clearfix"></div>
+						  <div class="item form-group " >
+							  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email"><h4>Email : </h4><span></span>
+  							</label>
+  							<div class="col-md-6 col-sm-6 col-xs-12">
+  							  <input disabled value="<?php echo $admins[0]->email;?>" class="isi form-control col-md-6 col-xs-12">
+  							</div>
+  						  </div>
+
 						  <div class="clearfix"></div>
 							<div class="form-group">
-								<div class="col-md-2 col-md-offset-7">
-								  <a class="btn btn-default" href="<?php echo site_url('setting');?>"> <i class="fa fa-cog"></i> Pengaturan</a>
+								<div class="col-md-1 col-md-offset-3">
+								  <a class="btn btn-default " href="<?php echo site_url('setting');?>"> <i class="fa fa-cog"></i> Pengaturan</a>
 								</div>
 							</div>
-                      </div>
+
+
+
                     </div>
                   </div>
                 </div>

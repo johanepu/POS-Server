@@ -69,7 +69,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo site_url('dashboard')?>" class="site_title"><i class="fa fa-paw"></i> <span>POS Retail</span></a>
+              <a href="<?php echo site_url('dashboard')?>" class="site_title"><i class="fa fa-shopping-cart"></i> <span>POS Retail</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -95,15 +95,15 @@
                 <ul class="nav side-menu">
                   <li><a href="<?php echo site_url('dashboard');?>"><i class="fa fa-home"></i> Beranda </span></a>
                   </li>
-                  <li><a href="<?php echo site_url('cabang')?>"><i class="fa fa-dashboard"></i> Data Cabang </a>
+                  <li><a href="<?php echo site_url('cabang')?>"><i class="fa fa-sitemap"></i> Data Cabang </a>
                   </li>
-                  <li><a href="<?php echo site_url('clients')?>"><i class="fa fa-dashboard"></i> Data Barang Client </a>
+                  <li><a href="<?php echo site_url('clients')?>"><i class="fa fa-bar-chart"></i> Data Barang Cabang </a>
                   </li>
-                  <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-dashboard"></i> Stok Barang </a>
+                  <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-cubes"></i> Stok Barang </a>
                   </li>
-                <li><a href="<?php echo site_url('barang_masuk')?>"><i class="fa fa-desktop"></i> Barang Masuk </a>
+                <li><a href="<?php echo site_url('barang_masuk')?>"><i class="fa fa-cart-plus"></i> Barang Masuk </a>
                 </li>
-                <li><a href="<?php echo site_url('barang_keluar')?>"><i class="fa fa-desktop"></i> Barang Keluar </a>
+                <li><a href="<?php echo site_url('barang_keluar')?>"><i class="fa fa-truck"></i> Barang Keluar </a>
                 </li>
                 </ul>
               </div>
@@ -114,17 +114,20 @@
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
+              <a data-toggle="tooltip" data-placement="top" title="Pengaturan" href="<?php echo site_url('setting');?>">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+              <!-- <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="requestFullScreen(body)">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a> -->
+              <a data-toggle="tooltip" data-placement="top" title="Profil"  href="<?php echo site_url('profil')?>">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo site_url('login/logout')?>">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+              <a title="" >
+                <span class="glyphicon " ></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
@@ -226,6 +229,24 @@
       document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFullScreen || document.mozCancelFullScreen || function () { return false; };
       isFullscreen ? document.cancelFullScreen() : element.requestFullScreen();
     }
+
+    function requestFullScreen(element) {
+    // Supports most browsers and their versions.
+    var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+
+    if (requestMethod) { // Native full screen.
+        requestMethod.call(element);
+    } else if (typeof window.ActiveXObject !== "undefined") { // Older IE.
+        var wscript = new ActiveXObject("WScript.Shell");
+        if (wscript !== null) {
+            wscript.SendKeys("{F11}");
+        }
+    }
+}
+
+// var elem = document.body; // Make the body go full screen.
+// requestFullScreen(elem);
+
     $(function(){
       $.ajax({
         url:'<?php echo site_url('dashboard/notifikasi') ?>',

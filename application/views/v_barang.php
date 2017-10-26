@@ -82,7 +82,7 @@
                   <p class="text-muted font-13 m-b-30">
                     Edit bisa dilakukan dengan melakukan double-click pada kolom yang hendak di ubah.
                   </p>
-
+                  <div class="clearfix"></div>
                   <table id="barang" class="table table-striped table-bordered">
                     <thead>
                       <tr>
@@ -146,18 +146,7 @@
     <form action="#" id="form" class="form-horizontal">
       <input type="hidden" value="" name="barang_masuk"/>
       <div class="form-body" id="form-body">
-        <!-- <div class="form-group">
-             <label class="control-label col-md-3">Id Transaksi</label>
-             <div class="col-md-9">
-               <input name="id_transaksi" id="transaction_id" placeholder="Id transaksi harus unik" class="form-control" type="text" title="Hanya angka" pattern="^[0-9]{3,7}$" minlength="3" maxlength="7" autocomplete="off" required>
-             </div>
-           </div> -->
-       <!-- <div class="form-group">
-         <label class="control-label col-md-3">Tanggal Masuk</label>
-         <div class="col-md-9">
-   <input name="tanggal[]" id="5" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local">
-         </div>
-       </div> -->
+
 
        <div class="form-group">
          <label class="control-label col-md-3">Deskripsi</label>
@@ -474,6 +463,8 @@ var flag =1;
                 }
               });
             });
+
+
 	</script>
 </body>
 <?php include 'footer.php' ?>

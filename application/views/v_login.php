@@ -69,7 +69,7 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-cutlery"></i> POS<b><i>Retail</i></b> Server</h1>
+                  <h1><i class="fa fa-shopping-cart"></i> POS<b><i>Retail</i></b> Server</h1>
                   <p>©2017 Hak Cipta dilindungi Undang-Undang. <b>POS Retail</b></p>
                 </div>
               </div>
@@ -98,8 +98,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-cutlery"></i> Waroenk<b><i>pos</i></b> Server</h1>
-                  <p>©2017 Hak Cipta dilindungi Undang-Undang. <b>Waroenkpos</b></p>
+                  <h1><i class="fa fa-shopping-cart"></i> POS<b><i>Retail</i></b> Server</h1>
+                  <p>©2017 Hak Cipta dilindungi Undang-Undang. <b>POS Retail</b></p>
                 </div>
               </div>
             </form>

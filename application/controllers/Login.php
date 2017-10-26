@@ -8,6 +8,10 @@ class Login extends CI_Controller{
 	function index(){
 		$this->load->view('v_login');
 	}
+
+	function masuk(){
+		$this->load->view('v_login');
+	}
 	function aksi_login(){
 		$user = $this->input->post('username',true);
 		$pass = $this->input->post('password',true);
@@ -21,7 +25,7 @@ class Login extends CI_Controller{
 			$data_session = array(
 				'user' => $user,
 				'status' => "login",
-				'nama' => $data[0]['nama']
+				'nama_petugas' => $data[0]['nama_petugas']
 				);
 			$this->session->set_userdata($data_session);
 			redirect(site_url("Dashboard"));

@@ -70,8 +70,8 @@
            <div class="x_panel">
              <div class="x_title">
                <h2>Silahkan Pilih Cabang :</h2>
-                 <a class="btn btn-default btn-sm  disabled tom" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a>
-                 					<div class="col-md-8 col-sm-8 col-xs-6">
+
+                          <div class="col-md-8 col-sm-8 col-xs-6">
                  					<select id="cab" class="form-control input-sm pil" onchange="javascript:lihatbarang(this.value)">
                  						<option value="0" selected>--Pilih--</option>
                  						<?php foreach($cabang as $c){?>
@@ -79,8 +79,9 @@
                  						<?php }?>
                  					</select>
                       </div>
-
-                             <div class="clearfix"></div>
+                      <a class="btn btn-default btn-sm disabled" id="tombol"><span class="fa fa-plus"></span> Kirim Barang</a>
+                       <!-- <a class="btn btn-default btn-sm  disabled tom" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a> -->
+                          <div class="clearfix"></div>
                            </div>
                            <div class="x_content">
                              <table id="barang_client" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -110,7 +111,27 @@
       </div>
 
 
-
+      <!-- Bootstrap modal -->
+      <div class="modal fade" id="modal_form" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title"></h3>
+          </div>
+          <form action="#" id="form" class="form-horizontal">
+            <div class="modal-body form">
+              <input type="hidden" value="" name="id_cabang" id="id_cabang"/>
+              <div class="form-body" id="form-body">
+              </div>
+              </div>
+              <div class="modal-footer" id="bawah">
+              </div>
+            </form>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+      <!-- End Bootstrap modal -->
 
       <!-- Bootstrap modal -->
         <div class="modal fade" id="modal_form" role="dialog">
@@ -217,9 +238,86 @@ var flag =1;
 		});
 	}
 
+  //show modal kirim barang
+  	 $(function(){
+       $(document).on('click','#tombol', function(){
+         var e = $(this).closest('div.x_title').find('select.pil');
+         var value = e.children('option').filter(':selected').val();
+         var teks = e.children('option').filter(':selected').text();
+         document.getElementById('id_cabang').value = value;
+         $('#form')[0].reset();
+         $('input.harga').removeAttr('value');
+         $('input.harga').attr('disabled','disabled');
+         $('#bawah').html('<input type="button" id="btn" class="btn btn-default" value="Cek Ketersediaan"><button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>');
+         var isi ='<div class="form-group"><label class="control-label col-md-3">Deskripsi</label><div class="col-md-9">'
+         +'<input name="desk" id="" placeholder="Keterangan transaksi" class="form-control" type="text" maxlength="50" autocomplete="off"></div></div>'
+         +'<div class="input" id="barang1"><div class="form-group"></label><label class="control-label col-md-3">Nama Barang</label><div class="col-md-7">'
+         +'<select name="pil[]" class="form-control pilbarang" onchange="" required><option value="" selected>--Pilih--</option><?php foreach($barang as $b){?>'
+         +'<option value="<?php echo $b->id_barang?>"><?php echo $b->nama_barang?></option><?php }?></select><input type="hidden" name="nama[]" value="" class="nama"></div><label class="control-label col-md-1 ikon" id=""></label></div>'
+         +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-3"><input name="jml[]" id="jml" placeholder="Jumlah produk" class="form-control" type="text" title="Hanya angka diperbolehkan" pattern="^[1-9][0-9]{0,11}$" maxlength="11" autocomplete="off" required></div>'
+         +'<label class="control-label col-md-1" style="padding-left:3px">Harga</label><div class="col-md-3 colharga"><input name="harga_barang[]" id="harga_barang" placeholder="Harga barang" class="form-control" type="text" disabled></div>'
+         +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="pluss1"><i class="fa fa-plus"></i></a></div>';
+         $("#form-body").html(isi);
+         $('#modal_form').modal('show');
+         $('.modal-title').text('Tambah Stok Barang di '+teks);
+      }).on('click', 'a.plus' ,function(){
+          var id = $(this).prop('id').replace('pluss','');
+          var idb = parseInt(id)+1;
+          var isi = '<div class="input" id="barang'+idb+'"><div class="form-group"></label><label class="control-label col-md-3">Nama Barang</label><div class="col-md-7">'
+          +'<select name="pil[]" class="form-control pilbarang" onchange="" required><option value="" selected>--Pilih--</option><?php foreach($barang as $b){?>'
+          +'<option value="<?php echo $b->id_barang?>"><?php echo $b->nama_barang?></option><?php }?></select><input type="hidden" name="nama[]" value="" class="nama"></div><label class="control-label col-md-1 ikon" id=""></label></div>'
+          +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-3"><input name="jml[]" id="jml" placeholder="Jumlah produk" class="form-control" type="text" title="Hanya angka diperbolehkan" pattern="^[1-9][0-9]{0,11}$" maxlength="11" autocomplete="off" required></div>'
+          +'<label class="control-label col-md-1" style="padding-left:3px">Harga</label><div class="col-md-3 colharga"><input name="harga_barang[]" id="harga_barang" placeholder="Harga barang" class="form-control" type="text" disabled></div>'
+          +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="pluss'+idb+'"><i class="fa fa-plus"></i></a></div>'
+          +'<div class="col-md-1"><a class="btn btn-danger btn-sm minus" id="minuss'+idb+'"><i class="fa fa-minus"></i></a></div></div></div>';
+          $("#form-body").append(isi);
+           $('#pluss'+id).attr('class','btn btn-primary btn-sm plus hidden');
+           $('#minuss'+id).attr('class','btn btn-primary btn-sm minus hidden');
+      }).on('click','a.minus', function(){
+        var id = $(this).prop('id').replace('minuss','');
+        var idl = id-1;
+        $('#barang'+id).remove();
+        if(id == 1){
+          $('#pluss'+idl).attr('class','btn btn-primary btn-sm plus');
+        }else {
+          $('#pluss'+idl).attr('class','btn btn-primary btn-sm plus');
+          $('#minuss'+idl).attr('class','btn btn-danger btn-sm minus');
+        }
+      }).on('click','#btn', function(){
+        $.ajax({
+          url: '<?php echo site_url('Clients/cekbarang') ?>',
+          type:'get',
+          data: $('#form').serialize(),
+          dataType:'JSON',
+          success:function(data){
+            var flag =1;
+            for (var i = 0; i < data.length; i++) {
+              var id = i+1;
+              if(data[i] == 0){
+                flag = 0;
+                $('#barang'+id).find('label.ikon').html('<span class="glyphicon glyphicon-remove" ></span>');
+              }else {
+                $('#barang'+id).find('label.ikon').html('<span class="glyphicon glyphicon-ok" ></span>');
+              }
+            }
+            if(flag == 0){
+              var isi = '<label class="control-label pull-left alert">Stok barang tidak mencukupi</label>'
+                       +'<input type="button" id="btn" class="btn btn-default" value="Cek Ketersediaan"/>'
+                       +'<button type="button" class="btn btn-default batal1" data-dismiss="modal">Batal</button>';
+              $('#bawah').html(isi);
+            }else {
+              var isi = '<input type="submit" class="btn btn-default pull-left" value="Kirim Barang"/>'
+                       +'<input type="button" id="btn" class="btn btn-default" value="Cek Ketersediaan"/>'
+                       +'<button type="button" class="btn btn-default batal1" data-dismiss="modal">Batal</button>';
+             $('#bawah').html(isi);
+            }
+          }
+        })
+      });
+    });
 
 
- //show modal tambah produk
+ //show modal tambah barang
 	 $(function(){
      $('.tom').click( function(){
        var e = $(this).closest('div.x_title').find('select.pil');
@@ -233,7 +331,7 @@ var flag =1;
        $('.modal-title').text('Tambah barang di '+teks);
     });
   });
- //simpan tambah produk
+ //simpan tambah barang
  $('#form').submit(function (e){
    $.ajax({
      url : '<?php echo site_url('clients/simpanbarang/');?>',
@@ -253,34 +351,34 @@ var flag =1;
  })
 
 
-  //add input elemen tambah produk
-    $(document).on('click', 'a.plus' ,function(){
-        var id = $(this).attr('id');
-        var ids = parseInt(id);
-        var idbaru = ids+1;
-        var idminus = idbaru*2; var idminus2 = idminus-2;
-        var id2 = parseInt($(this).closest('div.input').prop('id'));
-        var idsbaru = id2+1;
-        $("#form-body").append('<div class="input" id="'+idsbaru+'"><div class="form-group"><label class="control-label col-md-3">Nama Barang</label><div class="col-md-7">'
-        +'<select name="pil[]" class="form-control pilbarang" onchange="" required><option value="" selected>--Pilih--</option><?php foreach($barang as $d){?>'
-        +'<option value="<?php echo $d->id_barang?>"><?php echo $d->nama_barang?></option><?php }?></select><input type="hidden" name="nama[]" value="" class="nama"></div></div>'
-        +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-3"><input name="jml[]" id="jml" placeholder="Jumlah produk" class="form-control" type="text" title="Hanya angka diperbolehkan" pattern="^[1-9][0-9]{0,11}$" maxlength="11" autocomplete="off" required></div>'
-        +'<label class="control-label col-md-1" style="padding-left:3px">Harga</label><div class="col-md-3 colharga"><input name="harga_barang[]" id="harga_barang" placeholder="Harga barang" class="form-control" type="text" disabled></div>'
-        +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="'+idbaru+'"><i class="fa fa-plus"></i></a></div>'
-        +'<div class="col-md-1"><a class="btn btn-danger btn-sm minus" id="'+idminus+'"><i class="fa fa-minus"></i></a></div></div></div>');
-         $('#'+id).attr('class','btn btn-primary btn-sm plus hidden');
-         $('#'+idminus2).attr('class','btn btn-primary btn-sm minus hidden');
-    });
-    //hapus elemen input tambah stok barang
-     $(document).on('click','a.minus', function(){
-       var id = $(this).attr('id');
-       var ids = parseInt(id); ids2 = ids-2;
-       var idbaru = ids/2; idbaru = idbaru-1;
-       var id2 = $(this).closest('div.input').prop('id');
-       $('#'+id2).remove();
-       $('#'+idbaru).attr('class','btn btn-primary btn-sm plus');
-       $('#'+ids2).attr('class','btn btn-danger btn-sm minus');
-     });
+  // //add input elemen tambah produk
+  //   $(document).on('click', 'a.plus' ,function(){
+  //       var id = $(this).attr('id');
+  //       var ids = parseInt(id);
+  //       var idbaru = ids+1;
+  //       var idminus = idbaru*2; var idminus2 = idminus-2;
+  //       var id2 = parseInt($(this).closest('div.input').prop('id'));
+  //       var idsbaru = id2+1;
+  //       $("#form-body").append('<div class="input" id="'+idsbaru+'"><div class="form-group"><label class="control-label col-md-3">Nama Barang</label><div class="col-md-7">'
+  //       +'<select name="pil[]" class="form-control pilbarang" onchange="" required><option value="" selected>--Pilih--</option><?php foreach($barang as $d){?>'
+  //       +'<option value="<?php echo $d->id_barang?>"><?php echo $d->nama_barang?></option><?php }?></select><input type="hidden" name="nama[]" value="" class="nama"></div></div>'
+  //       +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-3"><input name="jml[]" id="jml" placeholder="Jumlah produk" class="form-control" type="text" title="Hanya angka diperbolehkan" pattern="^[1-9][0-9]{0,11}$" maxlength="11" autocomplete="off" required></div>'
+  //       +'<label class="control-label col-md-1" style="padding-left:3px">Harga</label><div class="col-md-3 colharga"><input name="harga_barang[]" id="harga_barang" placeholder="Harga barang" class="form-control" type="text" disabled></div>'
+  //       +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="'+idbaru+'"><i class="fa fa-plus"></i></a></div>'
+  //       +'<div class="col-md-1"><a class="btn btn-danger btn-sm minus" id="'+idminus+'"><i class="fa fa-minus"></i></a></div></div></div>');
+  //        $('#'+id).attr('class','btn btn-primary btn-sm plus hidden');
+  //        $('#'+idminus2).attr('class','btn btn-primary btn-sm minus hidden');
+  //   });
+  //   //hapus elemen input tambah stok barang
+  //    $(document).on('click','a.minus', function(){
+  //      var id = $(this).attr('id');
+  //      var ids = parseInt(id); ids2 = ids-2;
+  //      var idbaru = ids/2; idbaru = idbaru-1;
+  //      var id2 = $(this).closest('div.input').prop('id');
+  //      $('#'+id2).remove();
+  //      $('#'+idbaru).attr('class','btn btn-primary btn-sm plus');
+  //      $('#'+ids2).attr('class','btn btn-danger btn-sm minus');
+  //    });
 
 
 

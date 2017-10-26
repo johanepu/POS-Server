@@ -10,6 +10,17 @@ class Dashboard extends CI_Controller{
 	}
 	function index(){
 		$data = array('judul' => 'POS Retail | Dashboard');
+		$data['cabang'] = $this->mdata->tampil_all('cabang')->result();
+		$data['barang'] = $this->mdata->tampil_all('barang')->result();
+		$data['barang_masuk'] = $this->mdata->tampil_all('barang_masuk')->result();
+		$data['barang_keluar'] = $this->mdata->tampil_all('barang_keluar')->result();
+		$data['petugas'] = $this->mdata->tampil_all('petugas')->result();
+		$data['jml1'] = $this->totalpetugas();
+		$data['jml2'] = $this->totaljenisbarang();
+		$data['jml3'] = $this->barangkeluartoday();
+		$data['jml4'] = $this->totalcabang();
+		$data['jml5'] = $this->barangmasuktoday();
+
 		$this->load->view('v_dashboard',$data);
 	}
 	function reset(){
@@ -74,7 +85,7 @@ class Dashboard extends CI_Controller{
 												</a>
 											</li>';
 					$notif++;
-				}elseif($uri[1] == 'stokproduk' && $c == 1){
+				}elseif($uri[1] == 'stokbarang' && $c == 1){
 					$output .= '<li>
 												<a>
 													<span class="image"><img src="'.base_url('build/images/user.png').'" alt="Profile Image" /></span>
@@ -114,4 +125,36 @@ class Dashboard extends CI_Controller{
 		}
 		echo json_encode(array('isi' => $output,'notif' => $notif,'bubble' => $bubble));
 	}
+
+function totalpetugas(){
+	$count = $this->db->query('SELECT id  FROM petugas');
+	$total = $count->num_rows();
+	return $total;
+}
+
+function totaljenisbarang(){
+	$count = $this->db->query('SELECT id  FROM barang');
+	$total = $count->num_rows();
+	return $total;
+}
+
+function barangkeluartoday(){
+	$count = $this->db->query('SELECT * FROM barang_keluar WHERE tanggal >= CURDATE()');
+	$total = $count->num_rows();
+	return $total;
+}
+
+function barangmasuktoday(){
+	$count = $this->db->query('SELECT * FROM barang_masuk WHERE tanggal >= CURDATE()');
+	$total = $count->num_rows();
+	return $total;
+}
+
+function totalcabang(){
+	$count = $this->db->query('SELECT id_cabang FROM cabang');
+	$total = $count->num_rows();
+	return $total;
+}
+
+
 }

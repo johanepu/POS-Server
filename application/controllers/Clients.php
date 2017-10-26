@@ -198,4 +198,19 @@ class Clients extends CI_Controller{
       }
     }
   }
+
+	function cekbarang()
+	{
+		$idb = $this->input->get('pil',true);
+		$jml = $this->input->get('jml',true);
+		$n = count($idb);
+		for ($i=0; $i < $n; $i++) {
+			$where = array(
+				'id_barang' => $idb[$i],
+				'stok >=' => $jml[$i]
+			);
+			$output[] = $this->mdata->tampil_where('barang',$where)->num_rows();
+		}
+		echo json_encode($output);
+	}
 }
