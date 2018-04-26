@@ -107,8 +107,6 @@ function index()
    }
 
 
-
-
 	function simpanbarang()
 	{
 		 $this->db->trans_begin();
@@ -134,7 +132,6 @@ function index()
 		 $nama = $this->input->post('nama',true);
 		 $harga_barang = $this->input->post('harga',true);
 		 $jml = $this->input->post('jml',true);
-		 $satuan = $this->input->post('satuan',true);
 		 $n = sizeof($id_barang);
 		 for ($i = 0; $i < $n; $i++){
 			 $where = array('id_barang' => $id_barang[$i], 'nama_barang' => $nama[$i]);

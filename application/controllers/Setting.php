@@ -36,12 +36,11 @@ class Setting extends CI_Controller{
 	}
 	function password($id){
 		$password = $this->input->post('access_password',true);
-		$pass = $this->input->post('access_password',true);
 		$where = array(
 			'id' => $id
 		);
 		$edit = array(
-			'access_password' => $pass
+			'access_password' => $password
 		);
 		$data = $this->msetting->tampilAdmin($where)->result_array();
 		$cekpass = $data[0]['access_password'];

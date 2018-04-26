@@ -396,14 +396,14 @@ var flag =1;
     //edit dobel klik
 	$(document).on('dblclick', '.edit', function() {
     var ok = 0;
-    	var id = $(this).closest('tr').find('td.id_barang').text();
-      var where = $(this).closest('tr').find('td.id_barang').prop('id');
-      var tabel = $(this).closest('tr').attr('name');
-  var kolom = $(this).attr('id');
-  var teks = $(this).html();
-  var $this = $(this);
-  var isian = $this.text();
-  var idcabang = $('#cab').children('option').filter(':selected').val();
+  	var id = $(this).closest('tr').find('td.id_barang').text();
+    var where = $(this).closest('tr').find('td.id_barang').prop('id');
+    var tabel = $(this).closest('tr').attr('name');
+    var kolom = $(this).attr('id');
+    var teks = $(this).html();
+    var $this = $(this);
+    var isian = $this.text();
+    var idcabang = $('#cab').children('option').filter(':selected').val();
 
    isian = isian.replace('Rp. ','');
    var $input = $('<input>', {

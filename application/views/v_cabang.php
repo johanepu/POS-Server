@@ -128,15 +128,16 @@
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                      <div class="x_title">
+                      <div class="x_title ">
                         <h2>Silahkan Pilih Cabang :</h2>
-              					<div class="col-md-8 col-sm-8 col-xs-6">
-              					<select id="pil" class="form-control input-sm" onchange="javascript:lihatpetugas(this.value)">
-              						<option value="0" selected>--Pilih--</option>
-              						<?php foreach($cabang as $c){?>
-              						<option value="<?php echo $c->id_cabang?>"><?php echo $c->nama_cabang?></option>
-              						<?php }?>
-              					</select></div>
+              					<div class="col-md-7 col-sm-6 col-xs-4">
+                					<select id="pil" class="form-control input-sm" onchange="javascript:lihatpetugas(this.value)">
+                						<option value="0" selected>--Pilih--</option>
+                						<?php foreach($cabang as $c){?>
+                						<option value="<?php echo $c->id_cabang?>"><?php echo $c->nama_cabang?></option>
+                						<?php }?>
+                					</select>
+                        </div>
               					<a class="btn btn-default btn-sm disabled" onclick="tambahpetugas()" id="tombol"><span class="fa fa-plus"></span> Tambah Petugas</a>
                           <div class="clearfix"></div>
                         </div>
