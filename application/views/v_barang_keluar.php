@@ -147,19 +147,6 @@
     <form action="#" id="form" class="form-horizontal">
       <input type="hidden" value="" name="barang_masuk"/>
       <div class="form-body" id="form-body">
-        <!-- <div class="form-group">
-             <label class="control-label col-md-3">Id Transaksi</label>
-             <div class="col-md-9">
-               <input name="id_transaksi" id="transaction_id" placeholder="Id transaksi harus unik" class="form-control" type="text" title="Hanya angka" pattern="^[0-9]{3,7}$" minlength="3" maxlength="7" autocomplete="off" required>
-             </div>
-           </div> -->
-       <!-- <div class="form-group">
-         <label class="control-label col-md-3">Tanggal Masuk</label>
-         <div class="col-md-9">
-   <input name="tanggal[]" id="5" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local">
-         </div>
-       </div> -->
-
        <div class="form-group">
          <label class="control-label col-md-3">Deskripsi</label>
          <div class="col-md-9">
@@ -185,13 +172,13 @@
         <div class="form-group">
           <label class="control-label col-md-3">Harga</label>
           <div class="col-md-9">
-    <input name="harga[]" id="3" placeholder="Masukkan harga barang" class="form-control" type="text">
+            <input name="harga[]" id="3" placeholder="Masukkan harga barang" pattern="[0-9]+(\\.[0-9][0-9]?)?" class="form-control" type="text">
           </div>
         </div>
         <div class="form-group">
           <label class="control-label col-md-3">Jumlah</label>
           <div class="col-md-5">
-    <input name="jml[]" id="4" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="text">
+            <input name="jml[]" id="4" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="number">
           </div>
           <div class="col-md-1">
                 <!-- <a class="btn btn-default btn-sm" onclick="tambah()" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a> -->
@@ -352,8 +339,8 @@ var flag =1;
       +'<div class="form-group"><label class="control-label col-md-3">Nama Barang</label><div class="col-md-9">'
       +'<input type="text" name="nama[]" value="" placeholder="Masukkan nama barang" class="form-control barang" autocomplete="on">'
       +'<input type="hidden" name="pil[]" value="" class="isiid"><div class="daftarbarang" id="daftarbarang"></div></div></div>'
-      +'<div class="form-group"><label class="control-label col-md-3" style="padding-left:3px">Harga</label><div class="col-md-9"><input name="harga[]" id="harga" placeholder="Masukkan harga barang" class="form-control" type="text"></div></div>'
-      +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-9"><input name="jml[]" id="jml" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="text"></div></div>'
+      +'<div class="form-group"><label class="control-label col-md-3" style="padding-left:3px">Harga</label><div class="col-md-9"><input name="harga[]" id="harga" placeholder="Masukkan harga barang"  pattern="[0-9]+(\\.[0-9][0-9]?)?" class="form-control" type="text"></div></div>'
+      +'<div class="form-group"><label class="control-label col-md-3">Jumlah</label><div class="col-md-9"><input name="jml[]" id="jml" placeholder="Masukkan jumlah persediaan barang" class="form-control" type="number"></div></div>'
       // +'<div class="form-group"><label class="control-label col-md-3">Tanggal Masuk</label><div class="col-md-5"><input name="tanggal[]" id="tgl" placeholder="Masukkan tanggal masuk" class="form-control" type="datetime-local"></div>'
       +'<div class="col-md-1"><a class="btn btn-primary btn-sm plus" id="'+idbaru+'"><i class="fa fa-plus"></i></a></div>'
       +'<div class="col-md-1"><a class="btn btn-danger btn-sm minus" id="'+idminus+'"><i class="fa fa-minus"></i></a></div></div></div>');
