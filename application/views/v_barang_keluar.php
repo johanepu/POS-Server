@@ -24,8 +24,6 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <title>Gentelella Alela! | </title>
-
        <!-- Bootstrap -->
    <link href="<?php echo base_url('vendors/bootstrap/dist/css/bootstrap.min.css'); ?>" rel="stylesheet">
    <!-- Font Awesome -->
@@ -72,8 +70,7 @@
          <div class="col-md-12 col-sm-12 col-xs-12">
            <div class="x_panel">
              <div class="x_title">
-             <h2>Data Barang Masuk</h2>
-              <a class="btn btn-default btn-sm pull-right" onclick="tambah()" id="tombol"><span class="fa fa-plus"></span> Tambah Stok Barang</a>
+             <h2>Data Barang Keluar</h2>
                <div class="clearfix"></div>
                </div>
              <div class="x_content">

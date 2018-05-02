@@ -93,19 +93,17 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="<?php echo site_url('dashboard');?>"><i class="fa fa-home"></i> Beranda </span></a>
+                  <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-cubes"></i> Stok Barang </a>
                   </li>
                   <li><a href="<?php echo site_url('cabang')?>"><i class="fa fa-sitemap"></i> Data Cabang </a>
                   </li>
                   <li><a href="<?php echo site_url('clients')?>"><i class="fa fa-bar-chart"></i> Data Barang Cabang </a>
                   </li>
-                  <li><a href="<?php echo site_url('barang')?>"><i class="fa fa-cubes"></i> Stok Barang </a>
+                  <li><a href="<?php echo site_url('barang_masuk')?>"><i class="fa fa-cart-plus"></i> Barang Masuk </a>
                   </li>
-                <li><a href="<?php echo site_url('barang_masuk')?>"><i class="fa fa-cart-plus"></i> Barang Masuk </a>
-                </li>
-                <li><a href="<?php echo site_url('barang_keluar')?>"><i class="fa fa-truck"></i> Barang Keluar </a>
-                </li>
-                </ul>
+                  <li><a href="<?php echo site_url('barang_keluar')?>"><i class="fa fa-truck"></i> Barang Keluar </a>
+                  </li>
+                  </ul>
               </div>
 
 

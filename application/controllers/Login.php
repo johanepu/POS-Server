@@ -28,7 +28,7 @@ class Login extends CI_Controller{
 				'nama_petugas' => $data[0]['nama_petugas']
 				);
 			$this->session->set_userdata($data_session);
-			redirect(site_url("Dashboard"));
+			redirect(site_url("Barang"));
 		}else{
 			$data['login'] = 'gagal';
 			$this->load->view('v_login',$data);
