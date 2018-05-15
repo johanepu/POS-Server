@@ -6,11 +6,12 @@ class Cabang extends CI_Controller{
 		$this->load->model('mdata');
 		if($this->session->userdata('status') != "login"){
 			redirect(site_url("login"));
+		date_default_timezone_set('Asia/Jakarta');
 		}
 	}
 	function index(){
 		$data['judul'] = 'POS Retail | Database Cabang';
-		$data['cabang'] = $this->mdata->tampil_all('cabang')->result();
+		$data['cabang'] = $this->mdata->tampil_joincabang()->result();
 		$this->load->view('v_cabang',$data);
 	}
 	public function editsimpan()
@@ -67,7 +68,7 @@ class Cabang extends CI_Controller{
 				'user_id' => $id,
 				'apikey' => $api,
 				'level' => 10,
-				'ip_address' => $ip
+				'ip_addresses' => $ip
 			);
 			$this->mdata->simpan('apikeys',$input2);
 		}
@@ -83,16 +84,32 @@ class Cabang extends CI_Controller{
 	}
 	function simpanpetugas()
 	{
+	 $this->db->select('*');
+	 $this->db->from('petugas');
+	 $this->db->order_by('id','desc');
+	 $result = $this->db->get()->result();
+	 $last_id = $result[0]->id;//This is the last ID of the table
+
 		$this->db->trans_begin();
 		$id = $this->input->post('id_cabang',true);
 		$nama = $this->input->post('nama_petugas',true);
 		$user = $this->input->post('user',true);
 		$pass = $this->input->post('pass_petugas',true);
+		$level = $this->input->post('level_petugas',true);
 		$email = $this->input->post('email',true);
+		if ($level == 1) {
+			$kode_p = 'um';
+		} else {
+			$kode_p = 'up';
+		}
+		$id_petugas = $kode_p.$id.'0'.$last_id;
+		// echo '<pre>'.$id_petugas.'</pre>';
 		$input = array(
+			'id_petugas' => $id_petugas,
 			'nama_petugas' => $nama,
 			'user' => $user,
 			'pass_petugas' => $pass,
+			'level_petugas' => $level,
 			'email' => $email,
 			'id_cabang' => $id
 		);
@@ -111,7 +128,7 @@ class Cabang extends CI_Controller{
 	{
 		$this->db->trans_begin();
 		$tabel = $this->input->post('tabel',true);
-		$this->mdata->hapus(array('id' => $id),$tabel);
+		$this->mdata->hapus(array('id_cabang' => $id),$tabel);
 		if ($this->db->trans_status() === FALSE)
 		{
 		        $this->db->trans_rollback();
@@ -127,12 +144,18 @@ class Cabang extends CI_Controller{
 		$data = $this->mdata->tampil_where('petugas', $where)->result();
 		$no = 1;
 		foreach($data as $da){
-		$tanggal = strftime("%A, %d/%m/%Y : %T", strtotime($da->login_terakhir));
+		$tanggal = strftime("%A, %d/%B/%Y %H:%M", strtotime($da->login_terakhir));
+		// strftime("%A, %d/%m/%Y : %T", strtotime($da->login_terakhir));
+		if ($da->level_petugas==1) {
+					$level= "Manajer";
+				} else {
+					$level= "Petugas";
+				}
 		echo '<tr id="'.$da->id.'"><td>'.$no++.'</td>
 		  <td title="Kolom ini tidak bisa diedit" class="" id="nama">'.$da->nama_petugas.'</td>
-		  <td title="Kolom ini tidak bisa diedit" class="" id="harga">'.$da->user.'</td>
-		  <td title="Kolom ini tidak bisa diedit" class="" id="stok">'.$da->pass_petugas.'</td>
-		  <td title="Kolom ini tidak bisa diedit" class="" id="stok">'.$da->email.'</td>
+		  <td title="Kolom ini tidak bisa diedit" class="" id="username">'.$da->user.'</td>
+			<td title="Kolom ini tidak bisa diedit" class="" id="level">'.$level.'</td>
+		  <td title="Kolom ini tidak bisa diedit" class="" id="email">'.$da->email.'</td>
 		  <td title="Kolom ini tidak bisa diedit" class="" id="tanggal">'.$tanggal.'</td>
 		  <td name="petugas"><button class="btn btn-danger btn-xs delete" id="'.$da->id.'"><i class="fa fa-remove"></i></button></td></tr>';
 		}

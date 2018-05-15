@@ -80,6 +80,7 @@ class Clients extends CI_Controller{
 					'id_barang' => $id_barang[$i],
 					'nama_barang' => $nama_barang[$i],
 					'id_cabang' => $id,
+					'stok' => $jml[$i],
 					'harga_barang' => $harga_barang[$i]
 				);
 				$this->mdata->simpan('barang_client',$inputbarangclient);
@@ -177,7 +178,7 @@ class Clients extends CI_Controller{
 				}
         echo "Data berhasil disimpan";
   }
-	function updateharga($id,$idcabang)
+	function updateharga($id,$id_cabang)
   {
     $this->db->trans_begin();
     $produk = $this->mdata->tampil_where('produkclient_details',array('idbarang' => $id,'idcabang' => $idcabang))->result();

@@ -9,7 +9,7 @@ class mdata extends CI_Model{
 		 $user[] = $h->user;
 	 }
 	 foreach ($hasil as $h ) {
-		 $pass[] = $h->pass;
+		 $pass[] = $h->access_password;
 	 }
 	 return $result = array_combine($user,$pass);
  }
@@ -18,7 +18,7 @@ class mdata extends CI_Model{
 	 $hasil = $this->db->query('SELECT ip_address FROM cabang')->result();
 	 $ip = '';
 	 foreach ($hasil as $h ) {
-		 $ip = $ip.$h->ip.',';
+		 $ip = $ip.$h->ip_address.',';
 	 }
 	 return $ip;
  }
@@ -35,6 +35,14 @@ class mdata extends CI_Model{
 
 	function tampil_clients(){
 		return $this->db->get('cabang');
+	}
+
+	function tampil_joincabang(){
+		$this->db->select('*');
+		$this->db->from('cabang');
+		$this->db->join('apikeys', 'apikeys.user_id = cabang.id_cabang');
+		$query = $this->db->get();
+		return $query;
 	}
 
 	function tampil_all($table){

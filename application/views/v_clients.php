@@ -56,7 +56,7 @@
 
   <!-- page content -->
 
-  <div class="right_col" role="main">
+  <div class="right_col" style="min-height: 676px;" role="main">
            <div class="">
              <div class="page-title">
                <div class="title_left">
@@ -80,7 +80,6 @@
                  					</select>
                       </div>
                       <a class="btn btn-default btn-sm disabled" id="tombol"><span class="fa fa-plus"></span> Kirim Barang</a>
-                       <!-- <a class="btn btn-default btn-sm  disabled tom" id="tombol"><span class="fa fa-plus"></span> Tambah Barang</a> -->
                           <div class="clearfix"></div>
                            </div>
                            <div class="x_content">
@@ -167,7 +166,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3">Jumlah</label>
                         <div class="col-md-3">
-                          <input name="jml[]" id="jml" placeholder="Jumlah produk" class="form-control" type="number"  title="Hanya angka diperbolehkan"
+                          <input name="jml[]" id="jml" placeholder="Jumlah barang" class="form-control" type="number"  title="Hanya angka diperbolehkan"
                           maxlength="11" autocomplete="off" required>
                         </div>
                         <label class="control-label col-md-1" style="padding-left:3px">Harga</label>

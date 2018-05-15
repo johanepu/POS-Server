@@ -69,7 +69,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo site_url('dashboard')?>" class="site_title"><i class="fa fa-shopping-cart"></i> <span>POS Retail</span></a>
+              <a href="<?php echo site_url('barang')?>" class="site_title"><i class="fa fa-shopping-cart"></i> <span>POS Retail</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -115,9 +115,6 @@
               <a data-toggle="tooltip" data-placement="top" title="Pengaturan" href="<?php echo site_url('setting');?>">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
-              <!-- <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="requestFullScreen(body)">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a> -->
               <a data-toggle="tooltip" data-placement="top" title="Profil"  href="<?php echo site_url('profil')?>">
                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
               </a>
@@ -143,7 +140,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url('build/images/user.png'); ?>" alt=""><?php echo $this->session->userdata('nama');?>
+                    <img src="<?php echo base_url('build/images/user.png'); ?>" alt=""><?php echo $this->session->userdata('nama_petugas');?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -157,14 +154,14 @@
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
+                <!-- <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span id="notif" class=""></span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                   </ul>
-                </li>
+                </li> -->
               </ul>
             </nav>
           </div>
@@ -242,25 +239,6 @@
     }
 }
 
-// var elem = document.body; // Make the body go full screen.
-// requestFullScreen(elem);
-
-    $(function(){
-      $.ajax({
-        url:'<?php echo site_url('dashboard/notifikasi') ?>',
-        type:'get',
-        dataType:'json',
-        success:function(data){
-          $('#menu1').html(data.isi);
-          $('#notif').html(data.notif);
-          $('#notif').attr('class',data.bubble);
-        }
-      });
-      $('#notifikasi').click(function(){
-        $('#notif').html('');
-        $('#notif').attr('class','');
-      });
-    });
-    </script>
-    </body>
-    </html>
+</script>
+</body>
+</html>

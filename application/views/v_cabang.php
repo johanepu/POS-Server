@@ -54,7 +54,7 @@
       <div class="main_container">
 
          <!-- page content -->
-		 <div class="right_col" role="main">
+		 <div class="right_col" style="min-height: 676px;" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
@@ -94,6 +94,7 @@
                                       <th>IP Address</th>
                                       <th>Telepon</th>
                                       <th>Tanggal Dibuat </th>
+                                      <th>API Keys </th>
                                       <th>Hapus</th>
                                     </tr>
                                   </thead>
@@ -113,9 +114,11 @@
                                       <td title="Kolom ini tidak bisa diedit"
                                       class="" id="ip"><?php echo $c->ip_address?></td>
                                       <td title="Double click untuk edit and tekan Enter to menyimpan"
-                                      class="edit" id="nama"><?php echo $c->telepon?></td>
+                                      class="edit" id="telepon"><?php echo $c->telepon?></td>
                                       <td title="Kolom ini tidak bisa diedit"
-                                      class="" id="tanggal"><?php echo strftime("%A, %d/%m/%Y : %T", strtotime($c->dibuat));?></td>
+                                      class="" id="tanggal"><?php echo (strftime("%A, %d/%B/%Y", strtotime($c->dibuat)));?></td>
+                                      <td title="Double click untuk edit and tekan Enter to menyimpan"
+                                      class="" id="api"><?php echo $c->apikey?></td>
                                       <td name="cabang"><button class="btn btn-danger btn-xs delete" id="<?php echo $c->id_cabang;?>">
                                       <i class="fa fa-remove"></i></button></td>
                                       </tr>
@@ -148,7 +151,7 @@
                                 <th>No. </th>
                                 <th>Nama Petugas</th>
                                 <th>Username</th>
-                                <th>Password</th>
+                                <th>Level</th>
                                 <th>Email</th>
                                 <th>Terakhir Login</th>
                                 <th>Hapus</th>
@@ -260,8 +263,15 @@
     </div>
       <form action="#" id="form_petugas" class="form-horizontal">
         <div class="modal-body form">
-        <input type="hidden" value="" name="barang"/>
+        <input type="hidden" value="" name="id_petugas"/>
         <div class="form-body" id="form-body">
+          <div class="form-group">
+            <label class="control-label col-md-3">Level Petugas</label>
+            <div class="col-md-9">
+              <input type="radio" class="" name="level_petugas" id="manager" value="1" checked="" required />Manager &nbsp; &nbsp; &nbsp;
+              <input type="radio" class="" name="level_petugas" id="petugas" value="2" />Petugas
+            </div>
+          </div>
           <div class="form-group">
             <label class="control-label col-md-3">Nama Petugas</label>
             <div class="col-md-9">
@@ -380,6 +390,7 @@
       if(valid){$(this).removeClass("invalid").addClass("valid"); flag=1;}
 	       else{$(this).removeClass("valid").addClass("invalid"); flag=0;}
     });
+
   });
 	 function tambah()
     {
